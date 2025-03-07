@@ -10,6 +10,9 @@ library(tidyverse)
 set.seed(1807)
 
 data_alz <- cbind(diagnosis, predictors) %>% rename(y = diagnosis)
+data_alz$y <- as.factor(data_alz$y)
+data_alz$male <- as.factor(data_alz$male)
+
 
 alz_three_steps <- vim_perm_sim_wrapper(nsims= c(30, 120, 1000),
                                         alphas = c(0.3, 0.15, 0.05),
