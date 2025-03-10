@@ -1,3 +1,10 @@
+# Action required! Specify the number of parallel operations based on your system's capabilities (the 100 pre-specified here may be too much order
+# too few):
+
+num_cores <- 100
+
+
+
 lapply(list.files(path = "./functions/", full.names= T), source)
 set.seed(1807)
 seed_list <- floor(runif(1000, min = 1, max = 999999))
@@ -383,18 +390,28 @@ evaluatesetting28 <- function(i) {
 }
 
 
+# Load libraries necessary for parallelization:
+
+library(parallel)
+library(doParallel)
+
+
 # Start the cluster:
 
-# NOTE: This syntax requires the use of the RMPISNOW script.
+cl <- makeCluster(num_cores, type = "PSOCK")
 
-cl <- makeCluster()
 
+# Register the parallel backend:
+
+registerDoParallel(cl)
 
 
 # Export the objects in the workspace to the
 # parallel jobs:
 
-clusterExport(cl, list=ls())
+clusterExport(cl, varlist = ls())
+
+
 
 # Design from Degenhardt et al. 2019 with group size 50
 
