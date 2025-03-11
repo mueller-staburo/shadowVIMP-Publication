@@ -705,8 +705,8 @@ proposed_without_preselect_strobl_small <- try(publication_results_proposed_with
                                                                                               total_no_vars = 5))
 
 #savings
-save_RDS_and_delete_object(proposed_without_preselect_strobl_small, subfolder = "strobl")
-save_RDS_and_delete_object(proposed_without_preselect_strobl, subfolder = "strobl")
+save_RDS_and_delete_object(proposed_without_preselect_strobl_small, subfolder = "./code_rfvarsel/strobl")
+save_RDS_and_delete_object(proposed_without_preselect_strobl, subfolder = "./code_rfvarsel/strobl")
 rm(causal)
 
 
@@ -723,8 +723,8 @@ proposed_with_preselect_strobl_small <- try(publication_results_proposed_with_pr
                                                                                         total_no_vars = 5))
 
 #savings
-save_RDS_and_delete_object(proposed_with_preselect_strobl_small, subfolder = "strobl")
-save_RDS_and_delete_object(proposed_with_preselect_strobl, subfolder = "strobl")
+save_RDS_and_delete_object(proposed_with_preselect_strobl_small, subfolder = "./code_rfvarsel/strobl")
+save_RDS_and_delete_object(proposed_with_preselect_strobl, subfolder = "./code_rfvarsel/strobl")
 rm(causal)
 
 
@@ -744,8 +744,8 @@ boruta10000_strobl_small <- try(publication_results_boruta(boruta10000_strobl,
                                                            total_no_vars = 5))
 
 #savings
-save_RDS_and_delete_object(boruta10000_strobl_small, subfolder = "strobl")
-save_RDS_and_delete_object(boruta10000_strobl, subfolder = "strobl")
+save_RDS_and_delete_object(boruta10000_strobl_small, subfolder = "./code_rfvarsel/strobl")
+save_RDS_and_delete_object(boruta10000_strobl, subfolder = "./code_rfvarsel/strobl")
 rm(causal)
 
 
@@ -760,8 +760,8 @@ boruta500_strobl_small <- try(publication_results_boruta(boruta500_strobl,
                                                          total_no_vars = 5))
 
 #savings
-save_RDS_and_delete_object(boruta500_strobl_small, subfolder = "strobl")
-save_RDS_and_delete_object(boruta500_strobl, subfolder = "strobl")
+save_RDS_and_delete_object(boruta500_strobl_small, subfolder = "./code_rfvarsel/strobl")
+save_RDS_and_delete_object(boruta500_strobl, subfolder = "./code_rfvarsel/strobl")
 rm(causal)
 
 
@@ -781,8 +781,8 @@ rfvimptest10000_strobl_small <- try(publication_results_rfvimptest(rfvimptest100
                                                                    total_no_vars = 5))
 
 #savings
-save_RDS_and_delete_object(rfvimptest10000_strobl_small, subfolder = "strobl")
-save_RDS_and_delete_object(rfvimptest10000_strobl, subfolder = "strobl")
+save_RDS_and_delete_object(rfvimptest10000_strobl_small, subfolder = "./code_rfvarsel/strobl")
+save_RDS_and_delete_object(rfvimptest10000_strobl, subfolder = "./code_rfvarsel/strobl")
 rm(causal)
 
 
@@ -800,8 +800,8 @@ rfvimptest500_strobl_small <- try(publication_results_rfvimptest(rfvimptest500_s
                                                                  total_no_vars = 5))
 
 #savings
-save_RDS_and_delete_object(rfvimptest500_strobl_small, subfolder = "strobl")
-save_RDS_and_delete_object(rfvimptest500_strobl, subfolder = "strobl")
+save_RDS_and_delete_object(rfvimptest500_strobl_small, subfolder = "./code_rfvarsel/strobl")
+save_RDS_and_delete_object(rfvimptest500_strobl, subfolder = "./code_rfvarsel/strobl")
 rm(causal)
 
 
