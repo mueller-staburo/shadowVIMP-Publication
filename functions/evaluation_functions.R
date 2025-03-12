@@ -62,6 +62,11 @@ from_rfvimptest_to_small_result <- function(result_table_rfvimptest) {
   return(out)
 }
 
+from_rfvimptest_to_small_result_pvalues <- function(result_table_rfvimptest) {
+  out <- result_table_rfvimptest
+  return(out)
+}
+
 
 from_vita_to_small_result <- function(result_vita) {
   p_vals <- result_vita$pvalue
@@ -144,6 +149,18 @@ publication_results_rfvimptest <- function(raw_replicates_object, alpha, true_in
   result_list<- list()
   for(i in 1:length(raw_replicates_object)){
     result_list[[i]] <- analyse_replicate(from_rfvimptest_to_small_result(raw_replicates_object[[i]][["testres"]]),
+                                          true_informatives = true_informatives,
+                                          total_no_vars = total_no_vars,
+                                          alpha = alpha,
+                                          identifier = identifier)
+  }
+  return(result_list)
+}
+
+publication_results_rfvimptest_pvalues <- function(raw_replicates_object, alpha, true_informatives, total_no_vars, identifier = deparse(substitute(raw_replicates_object))) { 
+  result_list<- list()
+  for(i in 1:length(raw_replicates_object)){
+    result_list[[i]] <- analyse_replicate(from_rfvimptest_to_small_result_pvalues(raw_replicates_object[[i]][["pvalues"]]),
                                           true_informatives = true_informatives,
                                           total_no_vars = total_no_vars,
                                           alpha = alpha,

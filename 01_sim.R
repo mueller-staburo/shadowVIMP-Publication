@@ -146,7 +146,7 @@ evaluatesetting10 <- function(i) {
   
   set.seed(seed_list[[i]])
   data <- data.frame(mlbench::mlbench.friedman1(n = 100))
-  rfvimptest::rfvimptest(data=data, yname = "y", ntree=10000)
+  rfvimptest2(data=data, yname = "y", type = 'pval', num.threads = num.threads.ranger, ntree=10000)
 }
 
 evaluatesetting11 <- function(i) {
@@ -156,7 +156,7 @@ evaluatesetting11 <- function(i) {
   
   set.seed(seed_list[[i]])
   data <- data.frame(mlbench::mlbench.friedman1(n = 100))
-  rfvimptest::rfvimptest(data=data, yname = "y", ntree=500)
+  rfvimptest2(data=data, yname = 'y', type = 'pval', num.threads = num.threads.ranger, ntree=500)
 }
 
 
@@ -295,7 +295,7 @@ evaluatesetting21 <- function(i) {
   
   set.seed(seed_list[[i]])
   data <- data.frame(strobl_sim(relevance = 0.2) %>% mutate(y=as.factor(y)))
-  rfvimptest2(data=data, yname = "y", ntree=10000, num.threads = num.threads.ranger,
+  rfvimptest2(data=data, yname = "y", type='pval', ntree=10000, num.threads = num.threads.ranger,
               respect.unordered.factors = "order")
 }
 
@@ -306,7 +306,7 @@ evaluatesetting22 <- function(i) {
   
   set.seed(seed_list[[i]])
   data <- data.frame(strobl_sim(relevance = 0.2) %>% mutate(y=as.factor(y)))
-  rfvimptest2(data=data, yname = "y", ntree=500, num.threads = num.threads.ranger,
+  rfvimptest2(data=data, yname = "y", type='pval', ntree=500, num.threads = num.threads.ranger,
               respect.unordered.factors = "order")
 }
 
@@ -375,7 +375,7 @@ evaluatesetting27 <- function(i) {
   set.seed(seed_list[[i]])
   data <- nicodemeus_sim()
   data$y <- data$y %>% sample()
-  rfvimptest::rfvimptest(data=data, yname = "y", ntree=10000, num.threads = num.threads.ranger)
+  rfvimptest2(data=data, yname = 'y', type = 'pval', ntree=10000, num.threads = num.threads.ranger)
 }
 
 evaluatesetting28 <- function(i) {
@@ -386,7 +386,7 @@ evaluatesetting28 <- function(i) {
   set.seed(seed_list[[i]])
   data <- nicodemeus_sim()
   data$y <- data$y %>% sample()
-  rfvimptest::rfvimptest(data=data, yname = "y", ntree=500, num.threads = num.threads.ranger)
+  rfvimptest2(data=data, yname = 'y', type = 'pval', ntree=500, num.threads = num.threads.ranger)
 }
 
 
@@ -662,7 +662,7 @@ rfvimptest10000_fried <- parLapply(cl, 1:num.replicates, function(z) try({evalua
 
 #small
 causal <- add_friedmann_informative_status()
-rfvimptest10000_fried_small <- try(publication_results_rfvimptest(rfvimptest10000_fried,
+rfvimptest10000_fried_small <- try(publication_results_rfvimptest_pvalues(rfvimptest10000_fried,
                                                                   0.05,
                                                                   true_informatives = causal,
                                                                   total_no_vars = 10))
@@ -677,7 +677,7 @@ rfvimptest500_fried <- parLapply(cl, 1:num.replicates, function(z) try({evaluate
 
 #small
 causal <- add_friedmann_informative_status()
-rfvimptest500_fried_small <- try(publication_results_rfvimptest(rfvimptest500_fried,
+rfvimptest500_fried_small <- try(publication_results_rfvimptest_pvalues(rfvimptest500_fried,
                                                                 0.05,
                                                                 true_informatives = causal,
                                                                 total_no_vars = 10))
@@ -775,7 +775,7 @@ rfvimptest10000_strobl <- parLapply(cl, 1:num.replicates, function(z) try({evalu
 
 #small
 causal <- add_strobl_informative_status()
-rfvimptest10000_strobl_small <- try(publication_results_rfvimptest(rfvimptest10000_strobl,
+rfvimptest10000_strobl_small <- try(publication_results_rfvimptest_pvalues(rfvimptest10000_strobl,
                                                                    alpha = 0.05,
                                                                    true_informatives = causal,
                                                                    total_no_vars = 5))
@@ -794,7 +794,7 @@ rfvimptest500_strobl <- parLapply(cl, 1:num.replicates, function(z) try({evaluat
 
 #small
 causal <- add_strobl_informative_status()
-rfvimptest500_strobl_small <- try(publication_results_rfvimptest(rfvimptest500_strobl,
+rfvimptest500_strobl_small <- try(publication_results_rfvimptest_pvalues(rfvimptest500_strobl,
                                                                  alpha = 0.05,
                                                                  true_informatives = causal,
                                                                  total_no_vars = 5))
@@ -890,7 +890,7 @@ rfvimptest10000_nicodemus <- parLapply(cl, 1:num.replicates, function(z) try({ev
 
 #small
 causal <- add_nicodemeus_informative_status()
-rfvimptest10000_nicodemus_small <- try(publication_results_rfvimptest(rfvimptest10000_nicodemus,
+rfvimptest10000_nicodemus_small <- try(publication_results_rfvimptest_pvalues(rfvimptest10000_nicodemus,
                                                                       alpha=0.05,
                                                                       true_informatives=causal,
                                                                       total_no_vars = 12))
@@ -906,7 +906,7 @@ rfvimptest500_nicodemus <- parLapply(cl, 1:num.replicates, function(z) try({eval
 
 #small
 causal <- add_nicodemeus_informative_status()
-rfvimptest500_nicodemus_small <- try(publication_results_rfvimptest(rfvimptest500_nicodemus,
+rfvimptest500_nicodemus_small <- try(publication_results_rfvimptest_pvalues(rfvimptest500_nicodemus,
                                                                     alpha=0.05,
                                                                     true_informatives=causal,
                                                                     total_no_vars = 12))
