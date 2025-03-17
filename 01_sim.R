@@ -1,3 +1,12 @@
+setwd("/nfsmb/koll/hornung/Projects/SideProjects/RFVarsel/Code_GitHub/shadowVIMP-Publication")
+
+Sys.setenv(OPENBLAS_NUM_THREADS = 2)
+Sys.getenv("OPENBLAS_NUM_THREADS")
+Sys.setenv(OMP_NUM_THREADS = 1)
+Sys.getenv("OMP_NUM_THREADS")
+data.table::setDTthreads(1)
+
+
 # Action required! Specify the number of parallel operations based on your system's capabilities (the 100 pre-specified here may be too much order
 # too few):
 
@@ -428,6 +437,10 @@ save_RDS_and_delete_object(proposed_without_preselect_deg_50_small, subfolder = 
 save_RDS_and_delete_object(proposed_without_preselect_deg_50, subfolder = "./code_rfvarsel/deg50")
 rm(causal)
 
+
+index <- 1
+save(index, file=paste0("index", index, ".Rda"))
+
 ### with pre-selection 
 proposed_with_preselect_deg_50 <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting2(z)}))
 
@@ -442,6 +455,10 @@ proposed_with_preselect_deg_50_small <- try(publication_results_proposed_with_pr
 save_RDS_and_delete_object(proposed_with_preselect_deg_50_small, subfolder = "./code_rfvarsel/deg50")
 save_RDS_and_delete_object(proposed_with_preselect_deg_50, subfolder = "./code_rfvarsel/deg50")
 rm(causal)
+
+
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
 
 
 ## Boruta
@@ -462,6 +479,10 @@ save_RDS_and_delete_object(boruta10000_deg_50_small, subfolder = "./code_rfvarse
 save_RDS_and_delete_object(boruta10000_deg_50, subfolder = "./code_rfvarsel/deg50")
 rm(causal)
 
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
+
 ### with num.trees = 500 (the default)
 boruta500_deg_50 <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting4(z)}))
 
@@ -475,6 +496,10 @@ boruta500_deg_50_small <- try(publication_results_boruta(boruta500_deg_50,
 save_RDS_and_delete_object(boruta500_deg_50_small, subfolder = "./code_rfvarsel/deg50")
 save_RDS_and_delete_object(boruta500_deg_50, subfolder = "./code_rfvarsel/deg50")
 rm(causal)
+
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
 
 
 ## Vita
@@ -491,6 +516,10 @@ vita_deg_50_small <- try(publication_results_vita(vita_deg_50,
 save_RDS_and_delete_object(vita_deg_50_small, subfolder = "./code_rfvarsel/deg50")
 save_RDS_and_delete_object(vita_deg_50, subfolder = "./code_rfvarsel/deg50")
 rm(causal)
+
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
 
 
 #degenhardt group size 10
@@ -511,6 +540,10 @@ save_RDS_and_delete_object(proposed_without_preselect_deg_10_small, subfolder = 
 save_RDS_and_delete_object(proposed_without_preselect_deg_10, subfolder = "./code_rfvarsel/deg10")
 rm(causal)
 
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
+
 ### with pre-selection 
 #parallel
 proposed_with_preselect_deg_10 <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting13(z)}))
@@ -526,6 +559,10 @@ proposed_with_preselect_deg_10_small <- try(publication_results_proposed_with_pr
 save_RDS_and_delete_object(proposed_with_preselect_deg_10_small, subfolder = "./code_rfvarsel/deg10")
 save_RDS_and_delete_object(proposed_with_preselect_deg_10, subfolder = "./code_rfvarsel/deg10")
 rm(causal)
+
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
 
 ## Boruta
 cat("Starting with Boruta ... \n")
@@ -546,6 +583,10 @@ save_RDS_and_delete_object(boruta10000_deg_10_small, subfolder = "./code_rfvarse
 save_RDS_and_delete_object(boruta10000_deg_10, subfolder = "./code_rfvarsel/deg10")
 rm(causal)
 
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
+
 
 ### with num.trees = 500 (the default)
 #parallel
@@ -561,6 +602,10 @@ boruta500_deg_10_small <- try(publication_results_boruta(boruta500_deg_10,
 save_RDS_and_delete_object(boruta500_deg_10_small, subfolder = "./code_rfvarsel/deg10")
 save_RDS_and_delete_object(boruta500_deg_10, subfolder = "./code_rfvarsel/deg10")
 rm(causal)
+
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
 
 
 ## Vita
@@ -579,6 +624,10 @@ vita_deg_10_small <- try(publication_results_vita(vita_deg_10,
 save_RDS_and_delete_object(vita_deg_10_small, subfolder = "./code_rfvarsel/deg10")
 save_RDS_and_delete_object(vita_deg_10, subfolder = "./code_rfvarsel/deg10")
 rm(causal)
+
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
 
 
 
@@ -604,6 +653,10 @@ save_RDS_and_delete_object(proposed_without_preselect_fried_small, subfolder = "
 save_RDS_and_delete_object(proposed_without_preselect_fried, subfolder = "./code_rfvarsel/fried")
 rm(causal)
 
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
+
 
 ### with pre-selection 
 proposed_with_preselect_fried <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting7(z)}))
@@ -618,6 +671,10 @@ proposed_with_preselect_fried_small <- try(publication_results_proposed_with_pre
 save_RDS_and_delete_object(proposed_with_preselect_fried_small, subfolder = "./code_rfvarsel/fried")
 save_RDS_and_delete_object(proposed_with_preselect_fried, subfolder = "./code_rfvarsel/fried")
 rm(causal)
+
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
 
 
 
@@ -639,6 +696,10 @@ save_RDS_and_delete_object(boruta10000_fried_small, subfolder = "./code_rfvarsel
 save_RDS_and_delete_object(boruta10000_fried, subfolder = "./code_rfvarsel/fried")
 rm(causal)
 
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
+
 
 ### with num.trees = 500 (the default)
 boruta500_fried <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting9(z)}))
@@ -653,6 +714,10 @@ boruta500_fried_small <- try(publication_results_boruta(boruta500_fried,
 save_RDS_and_delete_object(boruta500_fried_small, subfolder = "./code_rfvarsel/fried")
 save_RDS_and_delete_object(boruta500_fried, subfolder = "./code_rfvarsel/fried")
 rm(causal)
+
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
 
 
 
@@ -671,6 +736,10 @@ save_RDS_and_delete_object(rfvimptest10000_fried_small, subfolder = "./code_rfva
 save_RDS_and_delete_object(rfvimptest10000_fried, subfolder = "./code_rfvarsel/fried")
 rm(causal)
 
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
+
 
 
 rfvimptest500_fried <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting11(z)}))
@@ -685,6 +754,10 @@ rfvimptest500_fried_small <- try(publication_results_rfvimptest_pvalues(rfvimpte
 save_RDS_and_delete_object(rfvimptest500_fried_small, subfolder = "./code_rfvarsel/fried")
 save_RDS_and_delete_object(rfvimptest500_fried, subfolder = "./code_rfvarsel/fried")
 rm(causal)
+
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
 
 
 # Design Strobl
@@ -709,6 +782,10 @@ save_RDS_and_delete_object(proposed_without_preselect_strobl_small, subfolder = 
 save_RDS_and_delete_object(proposed_without_preselect_strobl, subfolder = "./code_rfvarsel/strobl")
 rm(causal)
 
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
+
 
 ### with pre-selection 
 
@@ -726,6 +803,10 @@ proposed_with_preselect_strobl_small <- try(publication_results_proposed_with_pr
 save_RDS_and_delete_object(proposed_with_preselect_strobl_small, subfolder = "./code_rfvarsel/strobl")
 save_RDS_and_delete_object(proposed_with_preselect_strobl, subfolder = "./code_rfvarsel/strobl")
 rm(causal)
+
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
 
 
 ## Boruta
@@ -748,6 +829,10 @@ save_RDS_and_delete_object(boruta10000_strobl_small, subfolder = "./code_rfvarse
 save_RDS_and_delete_object(boruta10000_strobl, subfolder = "./code_rfvarsel/strobl")
 rm(causal)
 
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
+
 
 #parallel
 boruta500_strobl <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting20(z)}))
@@ -763,6 +848,10 @@ boruta500_strobl_small <- try(publication_results_boruta(boruta500_strobl,
 save_RDS_and_delete_object(boruta500_strobl_small, subfolder = "./code_rfvarsel/strobl")
 save_RDS_and_delete_object(boruta500_strobl, subfolder = "./code_rfvarsel/strobl")
 rm(causal)
+
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
 
 
 ## RFVIMPTEST
@@ -785,6 +874,10 @@ save_RDS_and_delete_object(rfvimptest10000_strobl_small, subfolder = "./code_rfv
 save_RDS_and_delete_object(rfvimptest10000_strobl, subfolder = "./code_rfvarsel/strobl")
 rm(causal)
 
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
+
 
 
 #500 trees
@@ -803,6 +896,10 @@ rfvimptest500_strobl_small <- try(publication_results_rfvimptest_pvalues(rfvimpt
 save_RDS_and_delete_object(rfvimptest500_strobl_small, subfolder = "./code_rfvarsel/strobl")
 save_RDS_and_delete_object(rfvimptest500_strobl, subfolder = "./code_rfvarsel/strobl")
 rm(causal)
+
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
 
 
 # Design Nicodemus
@@ -828,6 +925,10 @@ save_RDS_and_delete_object(proposed_without_preselect_nicodemus_small, subfolder
 save_RDS_and_delete_object(proposed_without_preselect_nicodemus, subfolder = "./code_rfvarsel/nicodemus")
 rm(causal)
 
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
+
 ### with pre-selection 
 
 #parallel
@@ -843,6 +944,10 @@ proposed_with_preselect_nicodemus_small <- try(publication_results_proposed_with
 save_RDS_and_delete_object(proposed_with_preselect_nicodemus_small, subfolder = "./code_rfvarsel/nicodemus")
 save_RDS_and_delete_object(proposed_with_preselect_nicodemus, subfolder = "./code_rfvarsel/nicodemus")
 rm(causal)
+
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
 
 
 ## Boruta
@@ -864,6 +969,10 @@ save_RDS_and_delete_object(boruta10000_nicodemus_small, subfolder = "./code_rfva
 save_RDS_and_delete_object(boruta10000_nicodemus, subfolder = "./code_rfvarsel/nicodemus")
 rm(causal)
 
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
+
 ### with num.trees = 500 (the default)
 
 #parallel
@@ -880,6 +989,10 @@ boruta500_nicodemus_small <- try(publication_results_boruta(boruta500_nicodemus,
 save_RDS_and_delete_object(boruta500_nicodemus_small, subfolder = "./code_rfvarsel/nicodemus")
 save_RDS_and_delete_object(boruta500_nicodemus, subfolder = "./code_rfvarsel/nicodemus")
 rm(causal)
+
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
 
 
 ## RFVIMPTEST
@@ -899,6 +1012,10 @@ save_RDS_and_delete_object(rfvimptest10000_nicodemus_small, subfolder = "./code_
 save_RDS_and_delete_object(rfvimptest10000_nicodemus, subfolder = "./code_rfvarsel/nicodemus")
 rm(causal)
 
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
+
 #500 trees
 
 #parallel
@@ -915,8 +1032,14 @@ save_RDS_and_delete_object(rfvimptest500_nicodemus_small, subfolder = "./code_rf
 save_RDS_and_delete_object(rfvimptest500_nicodemus, subfolder = "./code_rfvarsel/nicodemus")
 rm(causal)
 
+index <- index + 1
+save(index, file=paste0("index", index, ".Rda"))
+
+
+sessionInfo()
 
 
 # Stop the cluster:
 
 stopCluster(cl)
+
