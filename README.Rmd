@@ -1,0 +1,72 @@
+---
+output: github_document
+bibliography: references.bib
+always_allow_html: true
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(kableExtra)
+```
+
+# shadowVIMP - Simulation Study
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+This repository contains the code for the simulation study conducted in [PAPER TITLE]. The most important files in this repository are:
+
+1. File `01_sim.R` specifies the data simulation scenarios along with the methods for performing feature selection.
+2. File `02_unpack_resuts.R` gathers the results obtained in the first file and computes performance measures for all scenarios.
+3. File `03_alzheimer` performs feature selection using the shadowVIMP method on the Alzheimer dataset from the `AppliedPredictiveModeling` package.
+
+The below table contains the details of the data simulation designs and feature selection methods that are specified in the `01_sim.R` file.
+
+```{r table_simulations_methods, echo=FALSE}
+methods_set1 <- c("shadowVIMP without pre-selection", 
+             "shadowVIMP with pre-selection", 
+             "Boruta algorithm with 10.000 trees [@kursa2010boruta, @kursa2010feature]", 
+             "Boruta algorithm with 500 trees [@kursa2010boruta, @kursa2010feature]", 
+             "Method from @janitza2018computationally with 10.000 trees")
+
+methods_set2 <- c("shadowVIMP without pre-selection", 
+             "shadowVIMP with pre-selection", 
+             "Boruta algorithm with 10.000 trees [@kursa2010boruta, @kursa2010feature]", 
+             "Boruta algorithm with 500 trees [@kursa2010boruta, @kursa2010feature]",
+             "Method from @hapfelmeier2023efficient with 10.000 trees, implemented in @hapfelmeier2023package",
+             "Method from @hapfelmeier2023efficient with 500 trees, implemented in @hapfelmeier2023package"
+             )
+
+table_content <- data.frame(
+  data_sim = c(rep("@degenhardt2019evaluation with a group size of 50, 100 observations, and a total of 5.000 covariates.", 5),
+               rep("@friedman1991multivariate with 100 observations", 6),
+               rep("@degenhardt2019evaluation with a group size of 10, 100 observations, and a total of 5.000 covariates.", 5),
+               rep("@strobl2007bias with 100 observations", 6),
+               rep("The null case of the design @nicodemus2010behaviour", 6)
+               ),
+  method = c(methods_set1, methods_set2, methods_set1, methods_set2, methods_set2),
+  name = paste0("evaluatesetting", 1:28)
+)
+
+
+names(table_content) <- c("Data Simulation Design", "Method", "Setting Name in `01_sim.R`")
+
+kable(table_content, "html", escape = FALSE, align = "c") %>%
+  collapse_rows(columns = 1, valign = "middle") %>% 
+  column_spec(1, width = "20em") %>%  # Adjust width of the first column
+  kable_styling(full_width = FALSE)
+
+```
+
+The remainder of the repository has the following structure:
+
+* Folder `code_rfvarse` stores the numeric results of all analyzed data simulation designs and feature selection algorithms, grouped into subfolders according to the data simulation design.
+* Folder `functions` contains the code for all custom functions used in this study.
+* The "xls" files store performance measures for both the proposed method and established methods, as created in the `01_sim.R` file.
+
+
