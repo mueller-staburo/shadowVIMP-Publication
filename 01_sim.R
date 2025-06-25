@@ -1,5 +1,3 @@
-setwd("/nfsmb/koll/hornung/Projects/SideProjects/RFVarsel/Code_GitHub/shadowVIMP-Publication")
-
 Sys.setenv(OPENBLAS_NUM_THREADS = 2)
 Sys.getenv("OPENBLAS_NUM_THREADS")
 Sys.setenv(OMP_NUM_THREADS = 1)
@@ -433,8 +431,8 @@ proposed_without_preselect_deg_50_small  <- try(publication_results_proposed_wit
                                                                                                true_informatives = causal,
                                                                                                total_no_vars = 5000))
 #savings
-save_RDS_and_delete_object(proposed_without_preselect_deg_50_small, subfolder = "./code_rfvarsel/deg50")
-save_RDS_and_delete_object(proposed_without_preselect_deg_50, subfolder = "./code_rfvarsel/deg50")
+save_RDS_and_delete_object(proposed_without_preselect_deg_50_small, subfolder = "./results/intermediate_results/deg50")
+save_RDS_and_delete_object(proposed_without_preselect_deg_50, subfolder = "./results/intermediate_results/deg50")
 rm(causal)
 
 
@@ -452,8 +450,8 @@ proposed_with_preselect_deg_50_small <- try(publication_results_proposed_with_pr
                                                                                         total_no_vars = 5000))
 
 #savings
-save_RDS_and_delete_object(proposed_with_preselect_deg_50_small, subfolder = "./code_rfvarsel/deg50")
-save_RDS_and_delete_object(proposed_with_preselect_deg_50, subfolder = "./code_rfvarsel/deg50")
+save_RDS_and_delete_object(proposed_with_preselect_deg_50_small, subfolder = "./results/intermediate_results/deg50")
+save_RDS_and_delete_object(proposed_with_preselect_deg_50, subfolder = "./results/intermediate_results/deg50")
 rm(causal)
 
 
@@ -475,8 +473,8 @@ boruta10000_deg_50_small <- try(publication_results_boruta(boruta10000_deg_50,
                                                            total_no_vars = 5000))
 
 #saving
-save_RDS_and_delete_object(boruta10000_deg_50_small, subfolder = "./code_rfvarsel/deg50")
-save_RDS_and_delete_object(boruta10000_deg_50, subfolder = "./code_rfvarsel/deg50")
+save_RDS_and_delete_object(boruta10000_deg_50_small, subfolder = "./results/intermediate_results/deg50")
+save_RDS_and_delete_object(boruta10000_deg_50, subfolder = "./results/intermediate_results/deg50")
 rm(causal)
 
 index <- index + 1
@@ -493,8 +491,8 @@ boruta500_deg_50_small <- try(publication_results_boruta(boruta500_deg_50,
                                                          true_informatives = causal,
                                                          total_no_vars = 5000))
 #savings
-save_RDS_and_delete_object(boruta500_deg_50_small, subfolder = "./code_rfvarsel/deg50")
-save_RDS_and_delete_object(boruta500_deg_50, subfolder = "./code_rfvarsel/deg50")
+save_RDS_and_delete_object(boruta500_deg_50_small, subfolder = "./results/intermediate_results/deg50")
+save_RDS_and_delete_object(boruta500_deg_50, subfolder = "./results/intermediate_results/deg50")
 rm(causal)
 
 index <- index + 1
@@ -513,8 +511,8 @@ vita_deg_50_small <- try(publication_results_vita(vita_deg_50,
                                                   true_informatives = causal,
                                                   total_no_vars = 5000))
 #savings
-save_RDS_and_delete_object(vita_deg_50_small, subfolder = "./code_rfvarsel/deg50")
-save_RDS_and_delete_object(vita_deg_50, subfolder = "./code_rfvarsel/deg50")
+save_RDS_and_delete_object(vita_deg_50_small, subfolder = "./results/intermediate_results/deg50")
+save_RDS_and_delete_object(vita_deg_50, subfolder = "./results/intermediate_results/deg50")
 rm(causal)
 
 index <- index + 1
@@ -536,8 +534,8 @@ proposed_without_preselect_deg_10_small  <- try(publication_results_proposed_wit
                                                                                                true_informatives = causal,
                                                                                                total_no_vars = 5000))
 #savings
-save_RDS_and_delete_object(proposed_without_preselect_deg_10_small, subfolder = "./code_rfvarsel/deg10")
-save_RDS_and_delete_object(proposed_without_preselect_deg_10, subfolder = "./code_rfvarsel/deg10")
+save_RDS_and_delete_object(proposed_without_preselect_deg_10_small, subfolder = "./results/intermediate_results/deg10")
+save_RDS_and_delete_object(proposed_without_preselect_deg_10, subfolder = "./results/intermediate_results/deg10")
 rm(causal)
 
 index <- index + 1
@@ -556,8 +554,8 @@ proposed_with_preselect_deg_10_small <- try(publication_results_proposed_with_pr
                                                                                         total_no_vars = 5000))
 
 #savings
-save_RDS_and_delete_object(proposed_with_preselect_deg_10_small, subfolder = "./code_rfvarsel/deg10")
-save_RDS_and_delete_object(proposed_with_preselect_deg_10, subfolder = "./code_rfvarsel/deg10")
+save_RDS_and_delete_object(proposed_with_preselect_deg_10_small, subfolder = "./results/intermediate_results/deg10")
+save_RDS_and_delete_object(proposed_with_preselect_deg_10, subfolder = "./results/intermediate_results/deg10")
 rm(causal)
 
 index <- index + 1
@@ -579,8 +577,8 @@ boruta10000_deg_10_small <- try(publication_results_boruta(boruta10000_deg_10,
                                                            total_no_vars = 5000))
 
 #saving
-save_RDS_and_delete_object(boruta10000_deg_10_small, subfolder = "./code_rfvarsel/deg10")
-save_RDS_and_delete_object(boruta10000_deg_10, subfolder = "./code_rfvarsel/deg10")
+save_RDS_and_delete_object(boruta10000_deg_10_small, subfolder = "./results/intermediate_results/deg10")
+save_RDS_and_delete_object(boruta10000_deg_10, subfolder = "./results/intermediate_results/deg10")
 rm(causal)
 
 index <- index + 1
@@ -599,8 +597,8 @@ boruta500_deg_10_small <- try(publication_results_boruta(boruta500_deg_10,
                                                          true_informatives = causal,
                                                          total_no_vars = 5000))
 #savings
-save_RDS_and_delete_object(boruta500_deg_10_small, subfolder = "./code_rfvarsel/deg10")
-save_RDS_and_delete_object(boruta500_deg_10, subfolder = "./code_rfvarsel/deg10")
+save_RDS_and_delete_object(boruta500_deg_10_small, subfolder = "./results/intermediate_results/deg10")
+save_RDS_and_delete_object(boruta500_deg_10, subfolder = "./results/intermediate_results/deg10")
 rm(causal)
 
 index <- index + 1
@@ -621,8 +619,8 @@ vita_deg_10_small <- try(publication_results_vita(vita_deg_10,
                                                   true_informatives = causal,
                                                   total_no_vars = 5000))
 #savings
-save_RDS_and_delete_object(vita_deg_10_small, subfolder = "./code_rfvarsel/deg10")
-save_RDS_and_delete_object(vita_deg_10, subfolder = "./code_rfvarsel/deg10")
+save_RDS_and_delete_object(vita_deg_10_small, subfolder = "./results/intermediate_results/deg10")
+save_RDS_and_delete_object(vita_deg_10, subfolder = "./results/intermediate_results/deg10")
 rm(causal)
 
 index <- index + 1
@@ -649,8 +647,8 @@ proposed_without_preselect_fried_small <- try(publication_results_proposed_witho
                                                                                              true_informatives = causal,
                                                                                              total_no_vars = 10))
 #savings
-save_RDS_and_delete_object(proposed_without_preselect_fried_small, subfolder = "./code_rfvarsel/fried")
-save_RDS_and_delete_object(proposed_without_preselect_fried, subfolder = "./code_rfvarsel/fried")
+save_RDS_and_delete_object(proposed_without_preselect_fried_small, subfolder = "./results/intermediate_results/fried")
+save_RDS_and_delete_object(proposed_without_preselect_fried, subfolder = "./results/intermediate_results/fried")
 rm(causal)
 
 index <- index + 1
@@ -668,8 +666,8 @@ proposed_with_preselect_fried_small <- try(publication_results_proposed_with_pre
                                                                                        true_informatives = causal,
                                                                                        total_no_vars = 10))
 #savings
-save_RDS_and_delete_object(proposed_with_preselect_fried_small, subfolder = "./code_rfvarsel/fried")
-save_RDS_and_delete_object(proposed_with_preselect_fried, subfolder = "./code_rfvarsel/fried")
+save_RDS_and_delete_object(proposed_with_preselect_fried_small, subfolder = "./results/intermediate_results/fried")
+save_RDS_and_delete_object(proposed_with_preselect_fried, subfolder = "./results/intermediate_results/fried")
 rm(causal)
 
 index <- index + 1
@@ -692,8 +690,8 @@ boruta10000_fried_small <- try(publication_results_boruta(boruta10000_fried,
                                                           true_informatives = causal,
                                                           total_no_vars = 10))
 #savings
-save_RDS_and_delete_object(boruta10000_fried_small, subfolder = "./code_rfvarsel/fried")
-save_RDS_and_delete_object(boruta10000_fried, subfolder = "./code_rfvarsel/fried")
+save_RDS_and_delete_object(boruta10000_fried_small, subfolder = "./results/intermediate_results/fried")
+save_RDS_and_delete_object(boruta10000_fried, subfolder = "./results/intermediate_results/fried")
 rm(causal)
 
 index <- index + 1
@@ -711,8 +709,8 @@ boruta500_fried_small <- try(publication_results_boruta(boruta500_fried,
                                                         true_informatives = causal,
                                                         total_no_vars = 10))
 #savings
-save_RDS_and_delete_object(boruta500_fried_small, subfolder = "./code_rfvarsel/fried")
-save_RDS_and_delete_object(boruta500_fried, subfolder = "./code_rfvarsel/fried")
+save_RDS_and_delete_object(boruta500_fried_small, subfolder = "./results/intermediate_results/fried")
+save_RDS_and_delete_object(boruta500_fried, subfolder = "./results/intermediate_results/fried")
 rm(causal)
 
 index <- index + 1
@@ -732,8 +730,8 @@ rfvimptest10000_fried_small <- try(publication_results_rfvimptest_pvalues(rfvimp
                                                                   true_informatives = causal,
                                                                   total_no_vars = 10))
 #savings
-save_RDS_and_delete_object(rfvimptest10000_fried_small, subfolder = "./code_rfvarsel/fried")
-save_RDS_and_delete_object(rfvimptest10000_fried, subfolder = "./code_rfvarsel/fried")
+save_RDS_and_delete_object(rfvimptest10000_fried_small, subfolder = "./results/intermediate_results/fried")
+save_RDS_and_delete_object(rfvimptest10000_fried, subfolder = "./results/intermediate_results/fried")
 rm(causal)
 
 index <- index + 1
@@ -751,8 +749,8 @@ rfvimptest500_fried_small <- try(publication_results_rfvimptest_pvalues(rfvimpte
                                                                 true_informatives = causal,
                                                                 total_no_vars = 10))
 #savings
-save_RDS_and_delete_object(rfvimptest500_fried_small, subfolder = "./code_rfvarsel/fried")
-save_RDS_and_delete_object(rfvimptest500_fried, subfolder = "./code_rfvarsel/fried")
+save_RDS_and_delete_object(rfvimptest500_fried_small, subfolder = "./results/intermediate_results/fried")
+save_RDS_and_delete_object(rfvimptest500_fried, subfolder = "./results/intermediate_results/fried")
 rm(causal)
 
 index <- index + 1
@@ -778,8 +776,8 @@ proposed_without_preselect_strobl_small <- try(publication_results_proposed_with
                                                                                               total_no_vars = 5))
 
 #savings
-save_RDS_and_delete_object(proposed_without_preselect_strobl_small, subfolder = "./code_rfvarsel/strobl")
-save_RDS_and_delete_object(proposed_without_preselect_strobl, subfolder = "./code_rfvarsel/strobl")
+save_RDS_and_delete_object(proposed_without_preselect_strobl_small, subfolder = "./results/intermediate_results/strobl")
+save_RDS_and_delete_object(proposed_without_preselect_strobl, subfolder = "./results/intermediate_results/strobl")
 rm(causal)
 
 index <- index + 1
@@ -800,8 +798,8 @@ proposed_with_preselect_strobl_small <- try(publication_results_proposed_with_pr
                                                                                         total_no_vars = 5))
 
 #savings
-save_RDS_and_delete_object(proposed_with_preselect_strobl_small, subfolder = "./code_rfvarsel/strobl")
-save_RDS_and_delete_object(proposed_with_preselect_strobl, subfolder = "./code_rfvarsel/strobl")
+save_RDS_and_delete_object(proposed_with_preselect_strobl_small, subfolder = "./results/intermediate_results/strobl")
+save_RDS_and_delete_object(proposed_with_preselect_strobl, subfolder = "./results/intermediate_results/strobl")
 rm(causal)
 
 index <- index + 1
@@ -825,8 +823,8 @@ boruta10000_strobl_small <- try(publication_results_boruta(boruta10000_strobl,
                                                            total_no_vars = 5))
 
 #savings
-save_RDS_and_delete_object(boruta10000_strobl_small, subfolder = "./code_rfvarsel/strobl")
-save_RDS_and_delete_object(boruta10000_strobl, subfolder = "./code_rfvarsel/strobl")
+save_RDS_and_delete_object(boruta10000_strobl_small, subfolder = "./results/intermediate_results/strobl")
+save_RDS_and_delete_object(boruta10000_strobl, subfolder = "./results/intermediate_results/strobl")
 rm(causal)
 
 index <- index + 1
@@ -845,8 +843,8 @@ boruta500_strobl_small <- try(publication_results_boruta(boruta500_strobl,
                                                          total_no_vars = 5))
 
 #savings
-save_RDS_and_delete_object(boruta500_strobl_small, subfolder = "./code_rfvarsel/strobl")
-save_RDS_and_delete_object(boruta500_strobl, subfolder = "./code_rfvarsel/strobl")
+save_RDS_and_delete_object(boruta500_strobl_small, subfolder = "./results/intermediate_results/strobl")
+save_RDS_and_delete_object(boruta500_strobl, subfolder = "./results/intermediate_results/strobl")
 rm(causal)
 
 index <- index + 1
@@ -870,8 +868,8 @@ rfvimptest10000_strobl_small <- try(publication_results_rfvimptest_pvalues(rfvim
                                                                    total_no_vars = 5))
 
 #savings
-save_RDS_and_delete_object(rfvimptest10000_strobl_small, subfolder = "./code_rfvarsel/strobl")
-save_RDS_and_delete_object(rfvimptest10000_strobl, subfolder = "./code_rfvarsel/strobl")
+save_RDS_and_delete_object(rfvimptest10000_strobl_small, subfolder = "./results/intermediate_results/strobl")
+save_RDS_and_delete_object(rfvimptest10000_strobl, subfolder = "./results/intermediate_results/strobl")
 rm(causal)
 
 index <- index + 1
@@ -893,8 +891,8 @@ rfvimptest500_strobl_small <- try(publication_results_rfvimptest_pvalues(rfvimpt
                                                                  total_no_vars = 5))
 
 #savings
-save_RDS_and_delete_object(rfvimptest500_strobl_small, subfolder = "./code_rfvarsel/strobl")
-save_RDS_and_delete_object(rfvimptest500_strobl, subfolder = "./code_rfvarsel/strobl")
+save_RDS_and_delete_object(rfvimptest500_strobl_small, subfolder = "./results/intermediate_results/strobl")
+save_RDS_and_delete_object(rfvimptest500_strobl, subfolder = "./results/intermediate_results/strobl")
 rm(causal)
 
 index <- index + 1
@@ -921,8 +919,8 @@ proposed_without_preselect_nicodemus_small <- try(publication_results_proposed_w
 
 
 #savings
-save_RDS_and_delete_object(proposed_without_preselect_nicodemus_small, subfolder = "./code_rfvarsel/nicodemus")
-save_RDS_and_delete_object(proposed_without_preselect_nicodemus, subfolder = "./code_rfvarsel/nicodemus")
+save_RDS_and_delete_object(proposed_without_preselect_nicodemus_small, subfolder = "./results/intermediate_results/nicodemus")
+save_RDS_and_delete_object(proposed_without_preselect_nicodemus, subfolder = "./results/intermediate_results/nicodemus")
 rm(causal)
 
 index <- index + 1
@@ -941,8 +939,8 @@ proposed_with_preselect_nicodemus_small <- try(publication_results_proposed_with
                                                                                            true_informatives=causal,
                                                                                            total_no_vars = 12))
 #savings
-save_RDS_and_delete_object(proposed_with_preselect_nicodemus_small, subfolder = "./code_rfvarsel/nicodemus")
-save_RDS_and_delete_object(proposed_with_preselect_nicodemus, subfolder = "./code_rfvarsel/nicodemus")
+save_RDS_and_delete_object(proposed_with_preselect_nicodemus_small, subfolder = "./results/intermediate_results/nicodemus")
+save_RDS_and_delete_object(proposed_with_preselect_nicodemus, subfolder = "./results/intermediate_results/nicodemus")
 rm(causal)
 
 index <- index + 1
@@ -965,8 +963,8 @@ boruta10000_nicodemus_small <- try(publication_results_boruta(boruta10000_nicode
                                                               true_informatives=causal,
                                                               total_no_vars = 12))
 #savings
-save_RDS_and_delete_object(boruta10000_nicodemus_small, subfolder = "./code_rfvarsel/nicodemus")
-save_RDS_and_delete_object(boruta10000_nicodemus, subfolder = "./code_rfvarsel/nicodemus")
+save_RDS_and_delete_object(boruta10000_nicodemus_small, subfolder = "./results/intermediate_results/nicodemus")
+save_RDS_and_delete_object(boruta10000_nicodemus, subfolder = "./results/intermediate_results/nicodemus")
 rm(causal)
 
 index <- index + 1
@@ -986,8 +984,8 @@ boruta500_nicodemus_small <- try(publication_results_boruta(boruta500_nicodemus,
                                                             total_no_vars = 12))
 
 #savings
-save_RDS_and_delete_object(boruta500_nicodemus_small, subfolder = "./code_rfvarsel/nicodemus")
-save_RDS_and_delete_object(boruta500_nicodemus, subfolder = "./code_rfvarsel/nicodemus")
+save_RDS_and_delete_object(boruta500_nicodemus_small, subfolder = "./results/intermediate_results/nicodemus")
+save_RDS_and_delete_object(boruta500_nicodemus, subfolder = "./results/intermediate_results/nicodemus")
 rm(causal)
 
 index <- index + 1
@@ -1008,8 +1006,8 @@ rfvimptest10000_nicodemus_small <- try(publication_results_rfvimptest_pvalues(rf
                                                                       true_informatives=causal,
                                                                       total_no_vars = 12))
 #savings
-save_RDS_and_delete_object(rfvimptest10000_nicodemus_small, subfolder = "./code_rfvarsel/nicodemus")
-save_RDS_and_delete_object(rfvimptest10000_nicodemus, subfolder = "./code_rfvarsel/nicodemus")
+save_RDS_and_delete_object(rfvimptest10000_nicodemus_small, subfolder = "./results/intermediate_results/nicodemus")
+save_RDS_and_delete_object(rfvimptest10000_nicodemus, subfolder = "./results/intermediate_results/nicodemus")
 rm(causal)
 
 index <- index + 1
@@ -1028,8 +1026,8 @@ rfvimptest500_nicodemus_small <- try(publication_results_rfvimptest_pvalues(rfvi
                                                                     true_informatives=causal,
                                                                     total_no_vars = 12))
 #savings
-save_RDS_and_delete_object(rfvimptest500_nicodemus_small, subfolder = "./code_rfvarsel/nicodemus")
-save_RDS_and_delete_object(rfvimptest500_nicodemus, subfolder = "./code_rfvarsel/nicodemus")
+save_RDS_and_delete_object(rfvimptest500_nicodemus_small, subfolder = "./results/intermediate_results/nicodemus")
+save_RDS_and_delete_object(rfvimptest500_nicodemus, subfolder = "./results/intermediate_results/nicodemus")
 rm(causal)
 
 index <- index + 1
