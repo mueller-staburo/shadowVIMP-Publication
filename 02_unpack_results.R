@@ -23,6 +23,9 @@ names(data_list_proposed) <- proposed_files
 data_list_others <- lapply(non_proposed_files, readRDS)
 names(data_list_others) <- non_proposed_files
 
+
+### Performance measures (sensitivity, type-1 error etc...) TABLE 2 ###
+
 #Creates perf_others.xlsx which contains all performance measures for methods other than shadowVIMP
 
 perf_others <- foreach(i=1:length(data_list_others), .combine=rbind) %do% {
@@ -46,7 +49,7 @@ performance_others(data_list_others[[i]]) %>% group_by(identifier, type, iterpro
     TRUE ~ "Other"  # Default case if no match
   ))
 
-perf_others %>% writexl::write_xlsx(path="perf_others.xlsx")
+perf_others %>% writexl::write_xlsx(path="results/intermediate_results/perf_others.xlsx")
 
 
 #Creates perf_proposed.xlsx which contains all performance measures for the (proposed) method shadowVIMP
@@ -69,11 +72,20 @@ perf_proposed <- foreach(typ = c("per_variable", "pooled"), .combine = rbind) %:
     str_detect(identifier, regex("without_preselect", ignore_case = TRUE)) ~ "Proposed without preselect"))
 
 
-perf_proposed %>% writexl::write_xlsx(path="perf_proposed_all.xlsx")
+perf_proposed %>% writexl::write_xlsx(path="results/intermediate_results/perf_proposed_all.xlsx")
 
 
+#TABLE 2
+data.table::rbindlist(list(perf_proposed %>% filter(Method == 'Proposed with preselect' & type == 'pooled' & iterprop == '1', correction == 'with_correction') %>% 
+                             ungroup() %>% 
+                             select(design, Method, sensitivity_unadjusted, type1_error, sensitivity_fdr, fdr, sensitivity_fwer, fwer),
+                           perf_others %>% filter(ntree == 10000) %>% ungroup() %>% 
+                             select(design, Method, sensitivity_unadjusted, type1_error, sensitivity_fdr, fdr, sensitivity_fwer, fwer))) %>% arrange(design) %>%
+  writexl::write_xlsx(path="results/tables/table2.xlsx")
+  
 
-## Nicodemus design selection by variable investigation
+## Nicodemus design selection by variable investigation (TABLE 3)
+
 
 #select other
 #selection all variable names as header
@@ -86,7 +98,7 @@ names(strobl_sim())))
 empty_df_with_var_names <- setNames(data.frame(matrix(ncol = length(var_names), nrow = 0)), var_names)
 
 
-#Selections of methods not shadowVIMP
+#Selection frequency of variables of other methods (not shadowVIMP)
 select_others_raw <- lapply(data_list_others, selections_others)
 select_others <- data.table::rbindlist(list(data.table::rbindlist(select_others_raw, fill =T)%>% mutate(design = case_when(
   str_detect(identifier, regex("fried", ignore_case = TRUE)) ~ "Friedman",
@@ -110,7 +122,7 @@ select_others <- data.table::rbindlist(list(data.table::rbindlist(select_others_
 select_others_nico <- select_others %>% filter(design == "Nicodemus Null Design") %>% select_if(~ !all(is.na(.)))
 
 
-#Selections of (proposed) method shadowVIMP
+#Selection frequency of variables of (proposed) method shadowVIMP
 select_proposed_raw <- c(lapply(data_list_proposed, selections_proposed, iterprop = "1", type = "pooled", correction = "with_correction"),
                             lapply(data_list_proposed, selections_proposed, iterprop = "1", type = "per_variable", correction = "with_correction"))
 select_proposed <- data.table::rbindlist(list(data.table::rbindlist(select_proposed_raw, fill =T)%>% mutate(design = case_when(
@@ -133,11 +145,15 @@ select_proposed <- data.table::rbindlist(list(data.table::rbindlist(select_propo
 select_proposed_nico <- select_proposed %>% filter(design == "Nicodemus Null Design" & adjustment == "unadjusted") %>% select_if(~ !all(is.na(.)))
 
 
-data.table::rbindlist(list(select_others_nico, select_proposed_nico), fill = T ) %>% 
-  filter(ntree==10000 & adjustment == "unadjusted") %>% writexl::write_xlsx("nico_type1_error.xlsx")
 
+
+#TABLE 3
 data.table::rbindlist(list(select_others_nico, select_proposed_nico), fill = T ) %>% 
   filter(ntree==10000 & adjustment == "unadjusted") %>% 
   select(Method, type, V1, V2, V3, V4, V5, V6, V7, V8, V9, V10, V11, V12) %>% 
   rename_with(~ gsub("^V", "X", .), starts_with("V")) %>% 
-  writexl::write_xlsx("nico_type1_error.xlsx")
+  writexl::write_xlsx("results/tables/table3.xlsx")
+
+
+
+writeLines(capture.output(sessionInfo()), "results/logs/sessionInfo_02_unpack_results.txt")
