@@ -33,8 +33,9 @@
 #'   scale permutation importance by standard error.
 #' @param write.forest Boolean passed to [ranger::ranger()], if `TRUE`, the
 #'   fitted object is saved (required for making predictions). 
-#' @param additional_alphas Numeric
-#' @param additional_iter_prop Numeric 
+#' @param additional_alphas Numeric, additional significance levels
+#' @param additional_iter_prop Numeric between 0 and 1, specifies how many rows of
+#'   the `vimpermsim` object should be used.
 #' @param num.threads Numeric. The number of threads used by [ranger::ranger()]
 #'   for parallel tree building.
 #' @param ... Additional parameters.

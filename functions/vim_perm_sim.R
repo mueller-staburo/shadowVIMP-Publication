@@ -31,7 +31,9 @@
 #' @param df_name Character, name of the object passed as `entire_data`.
 #' @param ... Additional parameters.
 #'
-#' @returns List
+#' @returns List containing `nsim` variable importance values for both the
+#'   original and row-wise permuted predictors along with the control variables
+#'   used in the function call.
 vim_perm_sim <- function(entire_data, 
                          y, 
                          nsim = 100, 

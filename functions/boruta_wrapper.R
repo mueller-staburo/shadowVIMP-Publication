@@ -11,8 +11,8 @@
 #'   building
 #' @param ... Additional parameters passed to the [Boruta::Boruta].
 #'
-#' @seealso \code{\link[Boruta::Boruta]},
-#' \code{\link[Boruta::TentativeRoughFix]}
+#' @seealso \code{\link[Boruta]{Boruta}},
+#' \code{\link[Boruta]{TentativeRoughFix}}
 #'
 #' @returns Data frame containing the results of the [Boruta::Boruta] function.
 boruta_wrapper <- function(data, formula = y~., 

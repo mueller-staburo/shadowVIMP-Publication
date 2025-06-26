@@ -1,4 +1,8 @@
-#not proposed:
+#' Prepare the results from the non-proposed methods in order to calculate the
+#' sensitivity, Type-1 error, FDR and FWER
+#'
+#' @param dat_result List with the results obtained using non-proposed methods
+#' @returns Data frame with the results and placeholder columns
 performance_others <- function(dat_result) {
   perf <- data.frame(data.table::rbindlist(lapply(dat_result, `[[`, 2))) %>% mutate(type = NA,
                                                                                     iterprop = NA,
@@ -6,7 +10,10 @@ performance_others <- function(dat_result) {
   return(perf)
 }
 
-#performance propose:
+#' Prepare the results from the proposed method in order to calculate the
+#' sensitivity, Type-1 error, FDR and FWER
+#'
+#' @param dat_result List with the results obtained using the proposed method
 performance_proposed <- function(dat_result, iterprop = "1", type = "pooled", correction = "with_correction") {
   perf <- data.frame(data.table::rbindlist(lapply(dat_result[[iterprop]][[type]][[correction]], `[[`, 2))) %>% mutate(type = type,
                                                                                                                       iterprop = iterprop,
@@ -14,7 +21,9 @@ performance_proposed <- function(dat_result, iterprop = "1", type = "pooled", co
   return(perf)
 }
 
-#select other
+# Compute the selection frequencies of covariates using unadjusted p-values and 
+# p-values adjusted by Holm and Benjamini–Hochberg procedures, p-values obtained
+# by using non-proposed methods
 selections_others <- function(dat_result) {
   label <- dat_result[[1]][["performance"]][["identifier"]]
   select_unadjusted <- data.frame((table(c("dummy",unlist(lapply(lapply(dat_result, `[[`, 1), `[[`, "selected_unadjusted")))))) %>% mutate(identifier = label,
@@ -42,7 +51,9 @@ selections_others <- function(dat_result) {
   return(data.table::rbindlist(list(select_unadjusted, select_fdr, select_fwer), fill = T))
 }
 
-#select proposed
+# Compute the selection frequencies of covariates using unadjusted p-values and 
+# p-values adjusted by Holm and Benjamini–Hochberg procedures, p-values obtained
+# by using proposed method (shadowVIMP)
 selections_proposed <- function(dat_result, iterprop = "1", type = "pooled", correction = "with_correction") {
   label <- dat_result[[iterprop]][[type]][[correction]][[1]][["performance"]][["identifier"]]
   select_unadjusted <- data.frame((table(c("dummy", unlist(lapply(lapply(dat_result[[iterprop]][[type]][[correction]], `[[`, 1), `[[`, "selected_unadjusted")))))) %>% mutate(identifier = label,
