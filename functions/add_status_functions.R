@@ -1,20 +1,5 @@
 # File with 'add_status' functions 
 
-# TODO: is this function ever used?
-#' Title
-#'
-#' @param result 
-#' @param causal_vars 
-#'
-#' @returns
-add_causal_status_to_result <- function(result, causal_vars){
-  return(result %>% 
-           mutate(
-             causal_indicator = factor(ifelse(varname %in% causal_vars, 1, 0), 
-                                       levels = c("0", "1"))
-           ))
-}
-
 #' List the names of the predictor variables simulated from the latent variables 
 #' that are informative for the outcome (data simulation design
 #'  Degenhardt et al.(2019))
@@ -49,13 +34,12 @@ add_nicodemeus_informative_status <- function() {
   return(c())
 }
 
-# TODO: what is the point of the argument return_causal in this function when it is never used????
 #' Return the name of the informative predictor in Strobl et al. (2007) data 
 #' simulation design
 #'
 #' @param return_causal 
 #'
 #' @returns A character specifying the name of the informative predictor.
-add_strobl_informative_status <- function(return_causal=FALSE) {
+add_strobl_informative_status <- function() {
   return(c("X2"))
 }
