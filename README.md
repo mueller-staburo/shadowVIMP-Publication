@@ -6,31 +6,33 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-<<<<<<< HEAD
-This repository contains the code for the simulation study and practical
-application conducted in ‘shadowVIMP: Permutation-based multiple
-testing-controlled variable selection’. The most important files in this
-repository are:
+\<\<\<\<\<\<\< HEAD This repository contains the code for the simulation
+study and practical application conducted in ‘shadowVIMP:
+Permutation-based multiple testing-controlled variable selection’. The
+most important files in this repository are:
 
 1.  File `01_sim.R` applies shadowVIMP and compared approaches to the
     five data simulation designs and exports results.
+
 2.  File `02_unpack_resuts.R` gathers the results obtained from
     `01_sim.R` and computes performance measures for all scenarios.
-3.  File `03_alzheimer` applies shadowVIMP method on the Alzheimer
-    dataset from the `AppliedPredictiveModeling` package.
-=======
-This repository contains the code for the simulation study conducted in
-**“shadowVIMP: Permutation-based multiple testing-controlled variable
-selection”**. The most important files in this repository are:
 
-1.  File `01_sim.R` specifies the data simulation scenarios along with
+3.  # File `03_alzheimer` applies shadowVIMP method on the Alzheimer dataset from the `AppliedPredictiveModeling` package.
+
+    This repository contains the code for the simulation study conducted
+    in **“shadowVIMP: Permutation-based multiple testing-controlled
+    variable selection”**. The most important files in this repository
+    are:
+
+4.  File `01_sim.R` specifies the data simulation scenarios along with
     the methods for performing feature selection.
-2.  File `02_unpack_resuts.R` gathers the results obtained in the first
+
+5.  File `02_unpack_resuts.R` gathers the results obtained in the first
     file and computes performance measures for all scenarios.
-3.  File `03_alzheimer.R` performs feature selection using the
+
+6.  File `03_alzheimer.R` performs feature selection using the
     shadowVIMP method on the Alzheimer dataset from the
     `AppliedPredictiveModeling` package.
->>>>>>> 1cf56a589a8d2933715a42692ce78bd1373aeea6
 
 The remainder of the repository is organized as follows:
 
@@ -403,7 +405,6 @@ evaluatesetting28
 </tbody>
 </table>
 
-<<<<<<< HEAD
 The remainder of the repository has the following structure:
 
 - Folder `results/intermediate_results` contains the numeric results of
@@ -546,8 +547,6 @@ sessionInfo() of the Windows machine (`03_alzheimer.R`):
     #> 
     #> ```
 
-=======
->>>>>>> 1cf56a589a8d2933715a42692ce78bd1373aeea6
 <div id="refs" class="references csl-bib-body hanging-indent"
 entry-spacing="0">
 
