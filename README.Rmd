@@ -31,7 +31,7 @@ This repository contains the code for the simulation study conducted in **"shado
 1. File `01_sim.R` specifies the data simulation scenarios along with the methods for performing feature selection.
 2. File `02_unpack_resuts.R` gathers the results obtained in the first file and computes performance measures for all scenarios.
 3. File `03_alzheimer.R` performs feature selection using the shadowVIMP method on the Alzheimer dataset from the `AppliedPredictiveModeling` package.
->>>>>>> 1cf56a589a8d2933715a42692ce78bd1373aeea6
+
 
 The remainder of the repository is organized as follows:
 
@@ -82,7 +82,6 @@ kable(table_content, "html", escape = FALSE, align = "c") %>%
   column_spec(1, width = "20em") %>%  # Adjust width of the first column
   kable_styling(full_width = FALSE)
 
-<<<<<<< HEAD
 ```
 
 The remainder of the repository has the following structure:
@@ -128,6 +127,4 @@ sessionInfo() of the Windows machine (`03_alzheimer.R`):
 cat("```r\n")
 cat(readLines("results/logs/sessionInfo_03_alzheimer.txt"), sep = "\n")
 cat("\n```")
-=======
->>>>>>> 1cf56a589a8d2933715a42692ce78bd1373aeea6
 ```
