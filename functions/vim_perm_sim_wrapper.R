@@ -1,3 +1,46 @@
+#' Select influential covariates in random forests using multiple testing
+#' control
+#' 
+#' #' The `vim_perm_sim_wrapper()` function by default performs variable selection in
+#' multiple steps. Initially, it prunes the set of predictors using a relaxed
+#' (higher) alpha threshold in a pre-selection stage. Variables that pass this
+#' stage then undergo a final evaluation using the target (lower) alpha
+#' threshold and more iterations. This stepwise approach distinguishes
+#' informative from uninformative covariates based on their VIMPs and enhances
+#' computational efficiency. The user can also perform variable selection in a
+#' single step, without a pre-selection phase.
+#'
+#' @param alphas Numeric vector, significance level values for each step of the
+#'   procedure, default `c(0.3, 0.10, 0.05)`.
+#' @param nsims  Numeric vector, number of permutations to be performed in each
+#'   step of the procedure, default `c(30, 120, 1500)`.
+#' @param entire_data Input data frame.
+#' @param y Name of the column with the outcome.
+#' @param permute Character, one of: `"rows"` or `"columns"`, which specifies
+#'   whether the data should be permuted in rows or columns. Default is
+#'   `"rows"`.
+#' @param save_vim_history Character, specifies which variable importance
+#'   measures to save. Possible values are:
+#'  * `"all"` - save variable importance measures from all steps
+#'   of the procedure (both the pre-selection phase and the final selection
+#'   step).
+#'  * `"last"`(the default) - save only the variable importance measures from the final
+#'   step.
+#'  * `"none"` - do not save any variable importance measures.
+#' @param replace Boolean passed to [ranger::ranger()], specifies whether to
+#'   sample with or without replacement.
+#' @param scale.permutation.importance Boolean passed to [ranger::ranger()],
+#'   scale permutation importance by standard error.
+#' @param write.forest Boolean passed to [ranger::ranger()], if `TRUE`, the
+#'   fitted object is saved (required for making predictions). 
+#' @param additional_alphas Numeric, additional significance levels
+#' @param additional_iter_prop Numeric between 0 and 1, specifies how many rows of
+#'   the `vimpermsim` object should be used.
+#' @param num.threads Numeric. The number of threads used by [ranger::ranger()]
+#'   for parallel tree building.
+#' @param ... Additional parameters.
+#'
+#' @returns List
 vim_perm_sim_wrapper <- function(alphas = c(0.3, 0.10, 0.05), nsims = c(30, 120, 1500), 
                                  entire_data,
                                  y, 
@@ -12,22 +55,19 @@ vim_perm_sim_wrapper <- function(alphas = c(0.3, 0.10, 0.05), nsims = c(30, 120,
                                  ...
                                  ) {
   
-  #some checks
+  # Checks of input parameters
   if(!length(alphas) == length(nsims)){
     stop("alphas and nsims must have the same length!")
   }
   if(is.unsorted(rev(alphas)) | any(alphas <= 0 | any(alphas >= 1))) {
     stop("non-sensical alphas")
   }
-  
 
-  
   #number of variables, needed for BH and Holm adjustment
   M <- ncol(entire_data)-1
   
   #runtime start
   start_time <- Sys.time()
-  
   
   #for loop over alphas
   replicate <- NULL
@@ -41,7 +81,6 @@ vim_perm_sim_wrapper <- function(alphas = c(0.3, 0.10, 0.05), nsims = c(30, 120,
       result_from_previous_step_bool = TRUE
     } else{
 
-    
     #run algorithm
     
     vimpermsim <-  vim_perm_sim(entire_data = entire_data %>% { if(j>1) 
@@ -130,9 +169,7 @@ vim_perm_sim_wrapper <- function(alphas = c(0.3, 0.10, 0.05), nsims = c(30, 120,
     #runtime end
     end_time <- Sys.time()
     
-    replicate[[j]] <- list(#"replicate_id" = i,
-                           #"seed_list" = seed_list[[i]],
-                           "alpha" = alphas[j],
+    replicate[[j]] <- list("alpha" = alphas[j],
                            "result_taken_from_previous_step" = result_from_previous_step_bool,
                            "vimpermsim" = vimpermsim,
                            "variables_remaining_for_replicate" = variables_remaining_for_replicate,

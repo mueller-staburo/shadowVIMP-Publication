@@ -24,9 +24,8 @@ data_list_others <- lapply(non_proposed_files, readRDS)
 names(data_list_others) <- non_proposed_files
 
 
-### Performance measures (sensitivity, type-1 error etc...) TABLE 2 ###
-
-#Creates perf_others.xlsx which contains all performance measures for methods other than shadowVIMP
+### Performance measures: sensitivity, type-1 error, FDR, FWER both adjusted and unadjusted ###
+# Creates perf_others.xlsx which contains all performance measures for methods other than shadowVIMP
 
 perf_others <- foreach(i=1:length(data_list_others), .combine=rbind) %do% {
 performance_others(data_list_others[[i]]) %>% group_by(identifier, type, iterprop, correction) %>% summarise_all(tfl_output)
@@ -58,7 +57,9 @@ perf_proposed <- foreach(typ = c("per_variable", "pooled"), .combine = rbind) %:
   foreach(corre = c("with_correction", "without_correction"), .combine = rbind) %:%
   foreach(iterpr = c("0_2", "0_4", "0_6", "0_8", "1"), .combine = rbind) %:% 
             foreach(i=1:length(data_list_proposed), .combine=rbind) %do% {
-  performance_proposed(data_list_proposed[[i]], correction = corre, type=typ, iterprop = iterpr) %>% group_by(identifier, type, iterprop, correction)  %>% summarise_all(tfl_output)
+  performance_proposed(data_list_proposed[[i]], correction = corre, type=typ, iterprop = iterpr) %>%
+                group_by(identifier, type, iterprop, correction)  %>% 
+                summarise_all(tfl_output)
             } %>% mutate(design = case_when(
               str_detect(identifier, regex("fried", ignore_case = TRUE)) ~ "Friedman",
               str_detect(identifier, regex("strobl", ignore_case = TRUE)) ~ "Strobl",
@@ -75,7 +76,7 @@ perf_proposed <- foreach(typ = c("per_variable", "pooled"), .combine = rbind) %:
 perf_proposed %>% writexl::write_xlsx(path="results/intermediate_results/perf_proposed_all.xlsx")
 
 
-#TABLE 2
+# Code generating TABLE 2
 data.table::rbindlist(list(perf_proposed %>% filter(Method == 'Proposed with preselect' & type == 'pooled' & iterprop == '1', correction == 'with_correction') %>% 
                              ungroup() %>% 
                              select(design, Method, sensitivity_unadjusted, type1_error, sensitivity_fdr, fdr, sensitivity_fwer, fwer),
@@ -85,8 +86,6 @@ data.table::rbindlist(list(perf_proposed %>% filter(Method == 'Proposed with pre
   
 
 ## Nicodemus design selection by variable investigation (TABLE 3)
-
-
 #select other
 #selection all variable names as header
 var_names <- unique(c(names(nicodemeus_sim()),
@@ -144,10 +143,7 @@ select_proposed <- data.table::rbindlist(list(data.table::rbindlist(select_propo
 
 select_proposed_nico <- select_proposed %>% filter(design == "Nicodemus Null Design" & adjustment == "unadjusted") %>% select_if(~ !all(is.na(.)))
 
-
-
-
-#TABLE 3
+# Code generating TABLE 3
 data.table::rbindlist(list(select_others_nico, select_proposed_nico), fill = T ) %>% 
   filter(ntree==10000 & adjustment == "unadjusted") %>% 
   select(Method, type, V1, V2, V3, V4, V5, V6, V7, V8, V9, V10, V11, V12) %>% 

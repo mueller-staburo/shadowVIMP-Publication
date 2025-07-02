@@ -1,3 +1,39 @@
+#' Compute the variable importance of the predictors and their row-wise shadows
+#'
+#' `vim_perm_sim()` calculates repeatedly (`niters` times) the variable
+#' importance of the original values of the predictors and their row-wise
+#' permuted shadows. Each shadow's variable importance is computed based on a
+#' new permutation of the initial predictor values.
+#'
+#' @param entire_data Input data frame, outcome variable should be stored in the
+#'   column called "y".
+#' @param y Name of the column with the outcome.
+#' @param nsim Numeric, number of permutations of the initial predictor values,
+#'   default is 100.
+#' @param permute Character, one of: `"rows"` or `"columns"`, which specifies
+#'   whether the data should be permuted in rows or columns. Default is
+#'   `"rows"`.
+#' @param importance Character, the type of variable importance to be calculated
+#'   for each independent variable. Argument passed to [ranger::ranger()],
+#'   default is `permutation`.
+#' @param replace Boolean passed to [ranger::ranger()], specifies whether to
+#'   sample with or without replacement.
+#' @param model Character, one of `"cforest"` or `"cforest"`, specifies which
+#'   random forest implementation should be used.
+#' @param scale.permutation.importance Boolean passed to [ranger::ranger()],
+#'   scale permutation importance by standard error.
+#' @param num.threads Numeric. The number of threads used by [ranger::ranger()]
+#'   for parallel tree building.
+#' @param write.forest Boolean passed to [ranger::ranger()], if `TRUE`, the
+#'   fitted object is saved (required for making predictions).
+#' @param num.trees Numeric, number of trees. Passed to [ranger::ranger()],
+#'   default is `max(2 * (ncol(data) - 1), 10000)`.
+#' @param df_name Character, name of the object passed as `entire_data`.
+#' @param ... Additional parameters.
+#'
+#' @returns List containing `nsim` variable importance values for both the
+#'   original and row-wise permuted predictors along with the control variables
+#'   used in the function call.
 vim_perm_sim <- function(entire_data, 
                          y, 
                          nsim = 100, 
@@ -12,18 +48,9 @@ vim_perm_sim <- function(entire_data,
                          df_name = "X", 
                          ...) {
 
-  #entire_data <- data[,1:2]
   p <- ncol(entire_data)-1
   n <- nrow(entire_data)
-  # additional_args <- list(...)
-  # if(is.null(additional_args$mtry)) {
-  #   mtry <- floor(sqrt(2*p))
-  # }
-  # if(is.null(c(additional_args$num.trees, additional_args$ntree)[1])) {
-  #   num.trees = max(p, 10000)
-  # }
-  # entire_data <- simulation.data.cor(100, rep(50,6), 5000)
-  # permute = "columns"
+
   #Splitting predictors
   predictors <- entire_data %>% select(- c(y))
   
@@ -35,7 +62,6 @@ vim_perm_sim <- function(entire_data,
   predictors_p <- if(permute == "rows") {
     predictors[sample(1:n),,drop=FALSE]
   } else if(permute == "columns") {
-    #predictors %>% mutate(across(everything(), sample))
     data.frame(lapply(predictors, sample))
   } else {
       stop("invalid argument for permute")
@@ -48,18 +74,12 @@ vim_perm_sim <- function(entire_data,
   # Simulation:
   vimp_sim <- NULL
   dif_sim <- NULL
-
-  
   
   for (i in 1:nsim){
     if((i %% 50 == 0) | (i==1)) {
       cat(paste0(format(Sys.time()), ": dataframe=", df_name, " nsim=", nsim, " num.trees=", num.trees,". Running step ", i, "\n"))
     }
     
-    # dat_RF_rand <- predictors_p[sample(1:n),] 
-    # dat_RF_bind <- cbind.data.frame(entire_data, dat_RF_rand)  
-    
-
     #reshuffle row wise
     dt[,(ncol(predictors_p)+1):(2*ncol(predictors_p))] <- if(permute == "rows") {
       dt[sample(1:n), (ncol(predictors_p)+1):(2*ncol(predictors_p))]
@@ -77,9 +97,6 @@ vim_perm_sim <- function(entire_data,
     }
     
     if(model == "ranger") {
-      # range <- ranger::ranger(formula = y~., data= dt,
-      #                         importance = importance,
-      #                         replace = replace, ...)
       vimp_sim[[i]] <- (ranger::ranger(y = dt$y, x = dt %>% select(-y),
                                        importance = importance,
                                        replace = replace,
@@ -93,16 +110,10 @@ vim_perm_sim <- function(entire_data,
   
   
   # putting all results in a df and creating columns for the tests and the difference
-  df_sim <- as.data.frame(do.call(rbind, vimp_sim))# %>% mutate(iter = 1:nsim, .before = everything()[1])
+  df_sim <- as.data.frame(do.call(rbind, vimp_sim))
 
-  
-
-  
-  
   # Storing result to be returned
   res <- list(vim_simulated = df_sim,
               controls = list(..., nsim = nsim, permute = permute), 
               consistency_parallel = entire_data[,1])
 }
-
-

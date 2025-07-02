@@ -1,6 +1,8 @@
-#adapted rfvimptest function to allow setting respect.unordered.factors to 'order' in the ranger call. 
-#Official version at the time of the simulation study did not allow passing ... arguments to ranger due to a bug.
-#Only difference is in line 48, adding of the parameter to the ranger call.
+# A modified variant of [rfvimptest::rfvimptest] function that correctly forwards
+# `...` to [ranger::ranger], letting you set `respect.unordered.factors` to 
+# `"order"`. Otherwise the code is identical to the original, which at the time 
+# of the simulation study did not allow passing `...` to ranger due to a bug.
+# For the description of arguments see: \code{\link[rfvimptest]{rfvimptest}}
 rfvimptest2 <- function(data, yname, Mmax = 500, varnames = NULL, p0 = 0.06, p1 = 0.04, alpha = 0.05, beta = 0.2, A = 0.1, B = 10, h = 8, nperm = 1,
                        ntree = 500,
                        progressbar = TRUE,
@@ -8,7 +10,6 @@ rfvimptest2 <- function(data, yname, Mmax = 500, varnames = NULL, p0 = 0.06, p1 
                        test = c("general", "twosample")[1],
                        type = c("SPRT", "SAPT", "pval", "certain", "complete")[1], condinf=FALSE, ...) {
   starttime <- Sys.time()
-  # @seealso \code{\link{predict.divfor}}
   
   if(any(is.na(data))) {
     missvariables <- paste(names(data)[apply(data, 2, function(x) any(is.na(x)))], collapse = ", ")

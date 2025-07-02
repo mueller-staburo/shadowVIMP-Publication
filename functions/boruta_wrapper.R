@@ -1,7 +1,20 @@
-# source("simulation_degenhardt.R")
-# 
-# data <- simulation.data.cor(no.samples = 100, group.size = rep(10, 6), no.var.total = 200)
-
+#' A wrapper for the [Boruta::Boruta] function which restructures the outcome.
+#'
+#' @param data Data frame of predictors
+#' @param formula Formula describing model to be analysed
+#' @param consistency_parallel Boolean, if `TRUE`the response column is attached
+#'   to the results.
+#' @param remove_vim_history Boolean, if `TRUE` the full importance history is
+#'   removed from the outcome object
+#' @param num.trees Numeric, number of trees.
+#' @param num.threads Numeric, the number of threads used for parallel tree
+#'   building
+#' @param ... Additional parameters passed to the [Boruta::Boruta].
+#'
+#' @seealso \code{\link[Boruta]{Boruta}},
+#' \code{\link[Boruta]{TentativeRoughFix}}
+#'
+#' @returns Data frame containing the results of the [Boruta::Boruta] function.
 boruta_wrapper <- function(data, formula = y~., 
                            consistency_parallel = T, 
                            remove_vim_history = F, 
@@ -15,6 +28,3 @@ if(remove_vim_history) {res$ImpHistory <- NULL}
 return(res)
 }
 
-# res1 <- boruta_wrapper(data=data)
-# res1$decis
-# res1$finalDecision %>% names()

@@ -1,12 +1,23 @@
+#' Helper function for `vim_perm_sim_wrapper()` to identify significant
+#' covariates with FWER, FDR, or no multiple testing adjustment
+#'
+#' @param vimpermsim List, the outcome of `vim_perm_sim()` function
+#' @param M Numeric, number of covariates.
+#' @param alpha Numeric, the significance level, must be between 0 and 1.
+#' @param plus_one_plus_one_correction Boolean, if `TRUE` the obtained p-values
+#'   are never exactly equal to 1
+#' @param remove_vim_history Boolean, specifies whether the variable importances
+#'   obtained from the `vim_perm_sim()` function should be saved or not.
+#' @param iterations_prop Numeric between 0 and 1, specifies how many rows of
+#'   the `vimpermsim` object should be used.
+#'
+#' @returns List with test results whether a given covariate is deemed
+#'   influential after appropriate p-value correction.
 add_test_results <- function(vimpermsim, M, alpha = 0.05, 
                              plus_one_plus_one_correction = F,
                              remove_vim_history = F, 
                              iterations_prop = 1) {
-  # M<-5000
-  # alpha =0.05
-  # fdr=alpha
-  # fwer=alpha
-  
+
   if(iterations_prop < 1) {
     iters_to_use <- ceiling(iterations_prop * nrow(vimpermsim$vim_simulated))
     vim_simulated <- vimpermsim$vim_simulated[1:iters_to_use, ]
@@ -117,10 +128,6 @@ add_test_results <- function(vimpermsim, M, alpha = 0.05,
         quants_pooled_df$FWER_confirmed <- 1
       }
 
-    
-    
-  
-  
   if(!iterations_prop == 1){
     
     if(plus_one_plus_one_correction){

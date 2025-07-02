@@ -10,8 +10,7 @@ data.table::setDTthreads(1)
 
 num_cores <- 100
 
-
-
+# Read custom functions and generate seed
 lapply(list.files(path = "./functions/", full.names= T), source)
 set.seed(1807)
 seed_list <- floor(runif(1000, min = 1, max = 999999))
@@ -24,7 +23,8 @@ num.replicates <- 100        #how many replicates of the same design?
 boruta_maxRuns <- 1200
 
 
-#DEG 50
+# Data simulation design: Degenhardt et al.(2019) with a group size of 50 
+# Method: shadowVIMP without pre-selection
 evaluatesetting1 <- function(i) {
   
   require("dplyr")
@@ -39,6 +39,8 @@ evaluatesetting1 <- function(i) {
   
 }
 
+# Data simulation design: Degenhardt et al.(2019) with a group size of 50 
+# Method: shadowVIMP with pre-selection
 evaluatesetting2 <- function(i) {
   
   require("dplyr")
@@ -52,6 +54,8 @@ evaluatesetting2 <- function(i) {
                        save_vim_history = "none", num.threads = num.threads.ranger)
 }
 
+# Data simulation design: Degenhardt et al.(2019) with a group size of 50 
+# Method: Boruta algorithm with 10.000 trees
 evaluatesetting3 <- function(i) {
   
   require("dplyr")
@@ -65,6 +69,8 @@ evaluatesetting3 <- function(i) {
   boruta_wrapper(data, formula=y~., num.trees = 10000, maxRuns = boruta_maxRuns, num.threads = num.threads.ranger, remove_vim_history = ifelse(i == 50, F, T))
 }
 
+# Data simulation design: Degenhardt et al.(2019) with a group size of 50 
+# Method: Boruta algorithm with 500 trees
 evaluatesetting4 <- function(i) {
   
   require("dplyr")
@@ -78,6 +84,8 @@ evaluatesetting4 <- function(i) {
   boruta_wrapper(data, formula=y~., num.trees = 500, maxRuns = boruta_maxRuns, num.threads = num.threads.ranger, remove_vim_history = ifelse(i == 50, F, T))
 }
 
+# Data simulation design: Degenhardt et al.(2019) with a group size of 50 
+# Method: Method from Janitza et al. (2018) with 10.000 trees
 evaluatesetting5 <- function(i) {
   
   require("dplyr")
@@ -92,8 +100,8 @@ evaluatesetting5 <- function(i) {
            "Holm" = stats::p.adjust(pvalue, method = "holm"))
 }
 
-
-#FRIED
+# Data simulation design: Friedman (1991) with 100 observations 
+# Method: shadowVIMP without pre-selection
 evaluatesetting6 <- function(i) {
   
   require("dplyr")
@@ -107,6 +115,8 @@ evaluatesetting6 <- function(i) {
                        save_vim_history = "none", num.threads = num.threads.ranger)
 }
 
+# Data simulation design: Friedman (1991) with 100 observations 
+# Method: shadowVIMP with pre-selection
 evaluatesetting7 <- function(i) {
   
   require("dplyr")
@@ -120,6 +130,8 @@ evaluatesetting7 <- function(i) {
                        save_vim_history = "none", num.threads = num.threads.ranger)
 }
 
+# Data simulation design: Friedman (1991) with 100 observations 
+# Method: Boruta algorithm with 10.000 trees
 evaluatesetting8 <- function(i) {
   
   require("dplyr")
@@ -133,6 +145,8 @@ evaluatesetting8 <- function(i) {
   boruta_wrapper(data, formula=y~., num.trees = 10000, maxRuns = boruta_maxRuns, num.threads = num.threads.ranger, remove_vim_history = ifelse(i == 50, F, T))
 }
 
+# Data simulation design: Friedman (1991) with 100 observations 
+# Method: Boruta algorithm with 500 trees
 evaluatesetting9 <- function(i) {
   
   require("dplyr")
@@ -146,6 +160,8 @@ evaluatesetting9 <- function(i) {
   boruta_wrapper(data, formula=y~., num.trees = 500, maxRuns = boruta_maxRuns, num.threads = num.threads.ranger, remove_vim_history = ifelse(i == 50, F, T))
 }
 
+# Data simulation design: Friedman (1991) with 100 observations 
+# Method: Hapfelmeier, Hornung, and Haller (2023) with 10.000 trees
 evaluatesetting10 <- function(i) {
   
   require("dplyr")
@@ -156,6 +172,8 @@ evaluatesetting10 <- function(i) {
   rfvimptest2(data=data, yname = "y", type = 'pval', num.threads = num.threads.ranger, ntree=10000)
 }
 
+# Data simulation design: Friedman (1991) with 100 observations 
+# Method: Hapfelmeier, Hornung, and Haller (2023) with 500 trees
 evaluatesetting11 <- function(i) {
   
   require("dplyr")
@@ -166,10 +184,8 @@ evaluatesetting11 <- function(i) {
   rfvimptest2(data=data, yname = 'y', type = 'pval', num.threads = num.threads.ranger, ntree=500)
 }
 
-
-#DEG 10
-
-##proposed
+# Data simulation design: Degenhardt et al. (2019) with a group size of 10
+# Method: shadowVIMP without pre-selection
 evaluatesetting12 <- function(i) {
   
   require("dplyr")
@@ -184,6 +200,8 @@ evaluatesetting12 <- function(i) {
   
 }
 
+# Data simulation design: Degenhardt et al. (2019) with a group size of 10
+# Method: shadowVIMP with pre-selection
 evaluatesetting13 <- function(i) {
   
   require("dplyr")
@@ -197,7 +215,8 @@ evaluatesetting13 <- function(i) {
                        save_vim_history = "none", num.threads = num.threads.ranger)
 }
 
-##boruta
+# Data simulation design: Degenhardt et al. (2019) with a group size of 10
+# Method: Boruta algorithm with 10.000 trees
 evaluatesetting14 <- function(i) {
   
   require("dplyr")
@@ -210,6 +229,8 @@ evaluatesetting14 <- function(i) {
   boruta_wrapper(data, formula=y~., num.trees = 10000, maxRuns = boruta_maxRuns, num.threads = num.threads.ranger, remove_vim_history = T)
 }
 
+# Data simulation design: Degenhardt et al. (2019) with a group size of 10
+# Method: Boruta algorithm with 500 trees
 evaluatesetting15 <- function(i) {
   
   require("dplyr")
@@ -222,7 +243,8 @@ evaluatesetting15 <- function(i) {
   boruta_wrapper(data, formula=y~., num.trees = 500, maxRuns = boruta_maxRuns, num.threads = num.threads.ranger, remove_vim_history = T)
 }
 
-##janitza
+# Data simulation design: Degenhardt et al. (2019) with a group size of 10
+# Method: Method from Janitza, Celik, and Boulesteix (2018) with 10.000 trees
 evaluatesetting16 <- function(i) {
   
   require("dplyr")
@@ -237,8 +259,8 @@ evaluatesetting16 <- function(i) {
            "Holm" = stats::p.adjust(pvalue, method = "holm"))
 }
 
-
-#strobl
+# Data simulation design: Strobl et al. (2007) with 100 observations
+# Method: shadowVIMP without pre-selection
 evaluatesetting17 <- function(i) {
   
   require("dplyr")
@@ -253,6 +275,8 @@ evaluatesetting17 <- function(i) {
                        respect.unordered.factors = "order")
 }
 
+# Data simulation design: Strobl et al. (2007) with 100 observations
+# Method: shadowVIMP with pre-selection
 evaluatesetting18 <- function(i) {
   
   require("dplyr")
@@ -267,7 +291,8 @@ evaluatesetting18 <- function(i) {
                        respect.unordered.factors = "order")
 }
 
-##boruta
+# Data simulation design: Strobl et al. (2007) with 100 observations
+# Method: Boruta algorithm with 10.000 trees
 evaluatesetting19 <- function(i) {
   
   require("dplyr")
@@ -281,6 +306,8 @@ evaluatesetting19 <- function(i) {
                  respect.unordered.factors = "order")
 }
 
+# Data simulation design: Strobl et al. (2007) with 100 observations
+# Method: Boruta algorithm with 500 trees
 evaluatesetting20 <- function(i) {
   
   require("dplyr")
@@ -294,7 +321,8 @@ evaluatesetting20 <- function(i) {
                  respect.unordered.factors = "order")
 }
 
-##rfvimptest
+# Data simulation design: Strobl et al. (2007) with 100 observations
+# Method: Method from Hapfelmeier, Hornung, and Haller (2023) with 10.000 trees
 evaluatesetting21 <- function(i) {
   
   require("dplyr")
@@ -306,6 +334,8 @@ evaluatesetting21 <- function(i) {
               respect.unordered.factors = "order")
 }
 
+# Data simulation design: Strobl et al. (2007) with 100 observations
+# Method: Method from Hapfelmeier, Hornung, and Haller (2023) with 500 trees
 evaluatesetting22 <- function(i) {
   
   require("dplyr")
@@ -317,7 +347,8 @@ evaluatesetting22 <- function(i) {
               respect.unordered.factors = "order")
 }
 
-#nicodemus (null case)
+# Data simulation design: The null case of the design Nicodemus et al. (2010)
+# Method: shadowVIMP without pre-selection
 evaluatesetting23 <- function(i) {
   
   require("dplyr")
@@ -332,6 +363,8 @@ evaluatesetting23 <- function(i) {
                        save_vim_history = "none", num.threads = num.threads.ranger)
 }
 
+# Data simulation design: The null case of the design Nicodemus et al. (2010)
+# Method: shadowVIMP with pre-selection
 evaluatesetting24 <- function(i) {
   
   require("dplyr")
@@ -346,7 +379,8 @@ evaluatesetting24 <- function(i) {
                        save_vim_history = "none", num.threads = num.threads.ranger)
 }
 
-##boruta
+# Data simulation design: The null case of the design Nicodemus et al. (2010)
+# Method: Boruta algorithm with 10.000 trees
 evaluatesetting25 <- function(i) {
   
   require("dplyr")
@@ -360,6 +394,8 @@ evaluatesetting25 <- function(i) {
   boruta_wrapper(data, formula=y~., num.trees = 10000, maxRuns = boruta_maxRuns, num.threads = num.threads.ranger, remove_vim_history = T)
 }
 
+# Data simulation design: The null case of the design Nicodemus et al. (2010)
+# Method: Boruta algorithm with 500 trees
 evaluatesetting26 <- function(i) {
   
   require("dplyr")
@@ -373,7 +409,8 @@ evaluatesetting26 <- function(i) {
   boruta_wrapper(data, formula=y~., num.trees = 500, maxRuns = boruta_maxRuns, num.threads = num.threads.ranger, remove_vim_history = T)
 }
 
-##rfvimptest
+# Data simulation design: The null case of the design Nicodemus et al. (2010)
+# Method: Method from Hapfelmeier, Hornung, and Haller (2023) with 10.000 trees
 evaluatesetting27 <- function(i) {
   
   require("dplyr")
@@ -385,6 +422,8 @@ evaluatesetting27 <- function(i) {
   rfvimptest2(data=data, yname = 'y', type = 'pval', ntree=10000, num.threads = num.threads.ranger)
 }
 
+# Data simulation design: The null case of the design Nicodemus et al. (2010)
+# Method: Method from Hapfelmeier, Hornung, and Haller (2023) with 500 trees
 evaluatesetting28 <- function(i) {
   
   require("dplyr")
@@ -413,15 +452,13 @@ cl <- makeCluster(num_cores, type = "PSOCK")
 registerDoParallel(cl)
 
 
-# Export the objects in the workspace to the
-# parallel jobs:
+# Export the objects in the workspace to the parallel jobs:
 
 clusterExport(cl, varlist = ls())
 
 
-
 # Design from Degenhardt et al. 2019 with group size 50
-
+# shadowVIMP method - without pre-selection:
 cat("Starting with Proposed method ... \n")
 proposed_without_preselect_deg_50 <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting1(z)}))
 
@@ -439,7 +476,7 @@ rm(causal)
 index <- 1
 save(index, file=paste0("index", index, ".Rda"))
 
-### with pre-selection 
+# shadowVIMP method - without pre-selection:
 proposed_with_preselect_deg_50 <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting2(z)}))
 
 #small
@@ -459,10 +496,10 @@ index <- index + 1
 save(index, file=paste0("index", index, ".Rda"))
 
 
-## Boruta
+## Boruta method
 cat("Starting with Boruta ... \n")
 
-### with num.trees = 10000
+### Boruta method with num.trees = 10000
 boruta10000_deg_50 <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting3(z)}))
 
 #small
@@ -481,7 +518,7 @@ index <- index + 1
 save(index, file=paste0("index", index, ".Rda"))
 
 
-### with num.trees = 500 (the default)
+### Boruta method with num.trees = 500 (the default)
 boruta500_deg_50 <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting4(z)}))
 
 #small
@@ -500,7 +537,7 @@ save(index, file=paste0("index", index, ".Rda"))
 
 
 
-## Vita
+## Method from Janitza et al. (2018)
 cat("Starting with vita ... \n")
 vita_deg_50 <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting5(z)}))
 
@@ -518,13 +555,12 @@ rm(causal)
 index <- index + 1
 save(index, file=paste0("index", index, ".Rda"))
 
+# The end of Degenhardt et al. (2019) with group size 50 #
 
-
-#degenhardt group size 10
-
-
+# Start: Degenhardt et al. (2019) with group size 10
+# shadowVIMP method
 cat("Starting with Proposed method ... \n")
-#parallel
+# without pre-selection:
 proposed_without_preselect_deg_10 <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting12(z)}))
 
 #small
@@ -543,7 +579,6 @@ save(index, file=paste0("index", index, ".Rda"))
 
 
 ### with pre-selection 
-#parallel
 proposed_with_preselect_deg_10 <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting13(z)}))
 
 #small
@@ -566,7 +601,6 @@ save(index, file=paste0("index", index, ".Rda"))
 cat("Starting with Boruta ... \n")
 
 ### with num.trees = 10000
-#parallel
 boruta10000_deg_10 <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting14(z)}))
 
 #small
@@ -584,10 +618,7 @@ rm(causal)
 index <- index + 1
 save(index, file=paste0("index", index, ".Rda"))
 
-
-
 ### with num.trees = 500 (the default)
-#parallel
 boruta500_deg_10 <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting15(z)}))
 
 #small
@@ -604,9 +635,7 @@ rm(causal)
 index <- index + 1
 save(index, file=paste0("index", index, ".Rda"))
 
-
-
-## Vita
+## Method from Janitza et al. (2018)
 cat("Starting with vita ... \n")
 
 #parallel
@@ -626,15 +655,8 @@ rm(causal)
 index <- index + 1
 save(index, file=paste0("index", index, ".Rda"))
 
-
-
-
-
-
-# Design Friedman1
-
-
-## Proposed method
+# Data simulation design: Friedman (1991) with 100 observations
+## PshadowVIMP method 
 cat("Starting with Proposed method ... \n")
 ### without pre-selection
 proposed_without_preselect_fried <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting6(z)}))
@@ -673,9 +695,6 @@ rm(causal)
 index <- index + 1
 save(index, file=paste0("index", index, ".Rda"))
 
-
-
-
 ## Boruta
 cat("Starting with Boruta ... \n")
 boruta_maxRuns <- 1200
@@ -697,8 +716,6 @@ rm(causal)
 index <- index + 1
 save(index, file=paste0("index", index, ".Rda"))
 
-
-
 ### with num.trees = 500 (the default)
 boruta500_fried <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting9(z)}))
 
@@ -716,10 +733,8 @@ rm(causal)
 index <- index + 1
 save(index, file=paste0("index", index, ".Rda"))
 
-
-
-
-## RFVIMPTEST
+## Method from Hapfelmeier, Hornung, and Haller (2023)
+### with 10.000 trees
 cat("Starting with rfvimptest ... \n")
 rfvimptest10000_fried <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting10(z)}))
 
@@ -737,9 +752,7 @@ rm(causal)
 index <- index + 1
 save(index, file=paste0("index", index, ".Rda"))
 
-
-
-
+### with 500 trees
 rfvimptest500_fried <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting11(z)}))
 
 #small
@@ -756,16 +769,10 @@ rm(causal)
 index <- index + 1
 save(index, file=paste0("index", index, ".Rda"))
 
-
-
-# Design Strobl
-
-
+# Data simulation design: Strobl et al. (2007) with 100 observations
 ## Proposed method
 cat("Starting with Proposed method ... \n")
 ### without pre-selection
-
-#parallel
 proposed_without_preselect_strobl <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting17(z)}))
 
 #small
@@ -783,11 +790,7 @@ rm(causal)
 index <- index + 1
 save(index, file=paste0("index", index, ".Rda"))
 
-
-
 ### with pre-selection 
-
-#parallel
 proposed_with_preselect_strobl <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting18(z)}))
 
 #small
@@ -805,14 +808,9 @@ rm(causal)
 index <- index + 1
 save(index, file=paste0("index", index, ".Rda"))
 
-
-
 ## Boruta
 cat("Starting with Boruta ... \n")
-
 ### with num.trees = 10000
-
-#parallel
 boruta10000_strobl <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting19(z)}))
 
 #small
@@ -832,7 +830,7 @@ save(index, file=paste0("index", index, ".Rda"))
 
 
 
-#parallel
+### with 500 trees
 boruta500_strobl <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting20(z)}))
 
 #small
@@ -850,18 +848,15 @@ rm(causal)
 index <- index + 1
 save(index, file=paste0("index", index, ".Rda"))
 
-
-
-## RFVIMPTEST
+# Method from Hapfelmeier, Hornung, and Haller (2023)
 cat("Starting with rfvimptest ... \n")
 
-#10000 trees
-
-#parallel
+## with 10.000 trees
 rfvimptest10000_strobl <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting21(z)}))
 
 #small
 causal <- add_strobl_informative_status()
+
 rfvimptest10000_strobl_small <- try(publication_results_rfvimptest_pvalues(rfvimptest10000_strobl,
                                                                    alpha = 0.05,
                                                                    true_informatives = causal,
@@ -875,12 +870,7 @@ rm(causal)
 index <- index + 1
 save(index, file=paste0("index", index, ".Rda"))
 
-
-
-
-#500 trees
-
-#parallel
+## with 500 trees
 rfvimptest500_strobl <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting22(z)}))
 
 #small
@@ -898,16 +888,10 @@ rm(causal)
 index <- index + 1
 save(index, file=paste0("index", index, ".Rda"))
 
-
-
-# Design Nicodemus
-
-
+# Data simulation design: the null case of the design Nicodemus et al. (2010)
 ## Proposed method
 cat("Starting with Proposed method ... \n")
 ### without pre-selection
-
-#parallel
 proposed_without_preselect_nicodemus <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting23(z)}))
 
 #small
@@ -917,7 +901,6 @@ proposed_without_preselect_nicodemus_small <- try(publication_results_proposed_w
                                                                                                  true_informatives=causal,
                                                                                                  total_no_vars = 12))
 
-
 #savings
 save_RDS_and_delete_object(proposed_without_preselect_nicodemus_small, subfolder = "./results/intermediate_results/nicodemus")
 save_RDS_and_delete_object(proposed_without_preselect_nicodemus, subfolder = "./results/intermediate_results/nicodemus")
@@ -926,10 +909,7 @@ rm(causal)
 index <- index + 1
 save(index, file=paste0("index", index, ".Rda"))
 
-
 ### with pre-selection 
-
-#parallel
 proposed_with_preselect_nicodemus <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting24(z)}))
 
 #small
@@ -946,14 +926,9 @@ rm(causal)
 index <- index + 1
 save(index, file=paste0("index", index, ".Rda"))
 
-
-
 ## Boruta
 cat("Starting with Boruta ... \n")
-
-
 ### with num.trees = 10000
-#parallel
 boruta10000_nicodemus <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting25(z)}))
 
 #small
@@ -970,10 +945,7 @@ rm(causal)
 index <- index + 1
 save(index, file=paste0("index", index, ".Rda"))
 
-
 ### with num.trees = 500 (the default)
-
-#parallel
 boruta500_nicodemus <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting26(z)}))
 
 #small
@@ -991,12 +963,9 @@ rm(causal)
 index <- index + 1
 save(index, file=paste0("index", index, ".Rda"))
 
-
-
-## RFVIMPTEST
+## Method from Hapfelmeier, Hornung, and Haller (2023)
 cat("Starting with rfvimptest ... \n")
-#10000 trees
-#parallel
+### with 10000 trees
 rfvimptest10000_nicodemus <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting27(z)}))
 
 #small
@@ -1014,9 +983,7 @@ index <- index + 1
 save(index, file=paste0("index", index, ".Rda"))
 
 
-#500 trees
-
-#parallel
+### with 500 trees
 rfvimptest500_nicodemus <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting28(z)}))
 
 #small
@@ -1040,4 +1007,3 @@ sessionInfo()
 # Stop the cluster:
 
 stopCluster(cl)
-
