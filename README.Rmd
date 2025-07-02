@@ -71,14 +71,15 @@ The remainder of the repository has the following structure:
 * Folder `functions` contains the code for all custom functions used in this study.
 
 
-**Computational specifications:**
+Computational specifications: 
 
-Program and Platform
-• Program: R, versions 4.2.2 and 4.2.1.
-• The raw results of the simulation study were obtained on a Linux cluster, and the evaluation of the raw
+Program and Platform:
+
+* Program: R, versions 4.2.2 and 4.2.1.
+* The raw results of the simulation study were obtained on a Linux cluster, and the evaluation of the raw
 results to produce the final results as well as the conduction of the real data analyses was performed on
 Windows.
-• Below is the output of the R command sessionInfo() on the Linux machine and on the Windows
+* Below is the output of the R command sessionInfo() on the Linux machine and on the Windows
 machine. The output specifies which R packages and versions of those packages were used to generate
 the raw results and to evaluate them.
 
