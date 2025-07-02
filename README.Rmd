@@ -42,12 +42,12 @@ The remainder of the repository is organized as follows:
 
 Below is a table summarizing the data simulation designs and feature selection methods that are used in the `01_sim.R` file.
 
-```{r table_simulations_methods, echo=FALSE}
+```{r table_simulations_methods, echo = FALSE}
 methods_set1 <- c("shadowVIMP without pre-selection", 
              "shadowVIMP with pre-selection", 
              "Boruta algorithm with 10.000 trees [@kursa2010boruta, @kursa2010feature]", 
              "Boruta algorithm with 500 trees [@kursa2010boruta, @kursa2010feature]", 
-             "Method from @janitza2018computationally with 10.000 trees")
+             "Method from [@janitza2018computationally] with 10.000 trees")
 
 methods_set2 <- c("shadowVIMP without pre-selection", 
              "shadowVIMP with pre-selection", 
@@ -79,7 +79,7 @@ kable(table_content, "html", escape = FALSE, align = "c") %>%
 ```
 
 
-Computational specifications: 
+## Computational specifications
 
 Program and Platform:
 

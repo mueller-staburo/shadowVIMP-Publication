@@ -46,7 +46,7 @@ The remainder of the repository is organized as follows:
 Below is a table summarizing the data simulation designs and feature
 selection methods that are used in the `01_sim.R` file.
 
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<table class="table" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:center;">
@@ -62,7 +62,7 @@ Setting Name in `01_sim.R`
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center;width: 20em; ">
+<td style="text-align:center;vertical-align: middle !important;width: 20em; " rowspan="5">
 Degenhardt, Seifert, and Szymczak (2019) with a group size of 50, 100
 observations, and a total of 5.000 covariates.
 </td>
@@ -75,10 +75,6 @@ evaluatesetting1
 </tr>
 <tr>
 <td style="text-align:center;width: 20em; ">
-Degenhardt, Seifert, and Szymczak (2019) with a group size of 50, 100
-observations, and a total of 5.000 covariates.
-</td>
-<td style="text-align:center;">
 shadowVIMP with pre-selection
 </td>
 <td style="text-align:center;">
@@ -87,10 +83,6 @@ evaluatesetting2
 </tr>
 <tr>
 <td style="text-align:center;width: 20em; ">
-Degenhardt, Seifert, and Szymczak (2019) with a group size of 50, 100
-observations, and a total of 5.000 covariates.
-</td>
-<td style="text-align:center;">
 Boruta algorithm with 10.000 trees Kursa and Rudnicki (2010)
 </td>
 <td style="text-align:center;">
@@ -99,10 +91,6 @@ evaluatesetting3
 </tr>
 <tr>
 <td style="text-align:center;width: 20em; ">
-Degenhardt, Seifert, and Szymczak (2019) with a group size of 50, 100
-observations, and a total of 5.000 covariates.
-</td>
-<td style="text-align:center;">
 Boruta algorithm with 500 trees Kursa and Rudnicki (2010)
 </td>
 <td style="text-align:center;">
@@ -111,18 +99,14 @@ evaluatesetting4
 </tr>
 <tr>
 <td style="text-align:center;width: 20em; ">
-Degenhardt, Seifert, and Szymczak (2019) with a group size of 50, 100
-observations, and a total of 5.000 covariates.
-</td>
-<td style="text-align:center;">
-Method from Janitza, Celik, and Boulesteix (2018) with 10.000 trees
+Method from (Janitza, Celik, and Boulesteix 2018) with 10.000 trees
 </td>
 <td style="text-align:center;">
 evaluatesetting5
 </td>
 </tr>
 <tr>
-<td style="text-align:center;width: 20em; ">
+<td style="text-align:center;vertical-align: middle !important;width: 20em; " rowspan="6">
 Friedman (1991) with 100 observations
 </td>
 <td style="text-align:center;">
@@ -134,9 +118,6 @@ evaluatesetting6
 </tr>
 <tr>
 <td style="text-align:center;width: 20em; ">
-Friedman (1991) with 100 observations
-</td>
-<td style="text-align:center;">
 shadowVIMP with pre-selection
 </td>
 <td style="text-align:center;">
@@ -145,9 +126,6 @@ evaluatesetting7
 </tr>
 <tr>
 <td style="text-align:center;width: 20em; ">
-Friedman (1991) with 100 observations
-</td>
-<td style="text-align:center;">
 Boruta algorithm with 10.000 trees Kursa and Rudnicki (2010)
 </td>
 <td style="text-align:center;">
@@ -156,9 +134,6 @@ evaluatesetting8
 </tr>
 <tr>
 <td style="text-align:center;width: 20em; ">
-Friedman (1991) with 100 observations
-</td>
-<td style="text-align:center;">
 Boruta algorithm with 500 trees Kursa and Rudnicki (2010)
 </td>
 <td style="text-align:center;">
@@ -167,9 +142,6 @@ evaluatesetting9
 </tr>
 <tr>
 <td style="text-align:center;width: 20em; ">
-Friedman (1991) with 100 observations
-</td>
-<td style="text-align:center;">
 Method from Hapfelmeier, Hornung, and Haller (2023) with 10.000 trees,
 implemented in Hapfelmeier and Hornung (2023)
 </td>
@@ -179,9 +151,6 @@ evaluatesetting10
 </tr>
 <tr>
 <td style="text-align:center;width: 20em; ">
-Friedman (1991) with 100 observations
-</td>
-<td style="text-align:center;">
 Method from Hapfelmeier, Hornung, and Haller (2023) with 500 trees,
 implemented in Hapfelmeier and Hornung (2023)
 </td>
@@ -190,7 +159,7 @@ evaluatesetting11
 </td>
 </tr>
 <tr>
-<td style="text-align:center;width: 20em; ">
+<td style="text-align:center;vertical-align: middle !important;width: 20em; " rowspan="5">
 Degenhardt, Seifert, and Szymczak (2019) with a group size of 10, 100
 observations, and a total of 5.000 covariates.
 </td>
@@ -203,10 +172,6 @@ evaluatesetting12
 </tr>
 <tr>
 <td style="text-align:center;width: 20em; ">
-Degenhardt, Seifert, and Szymczak (2019) with a group size of 10, 100
-observations, and a total of 5.000 covariates.
-</td>
-<td style="text-align:center;">
 shadowVIMP with pre-selection
 </td>
 <td style="text-align:center;">
@@ -215,10 +180,6 @@ evaluatesetting13
 </tr>
 <tr>
 <td style="text-align:center;width: 20em; ">
-Degenhardt, Seifert, and Szymczak (2019) with a group size of 10, 100
-observations, and a total of 5.000 covariates.
-</td>
-<td style="text-align:center;">
 Boruta algorithm with 10.000 trees Kursa and Rudnicki (2010)
 </td>
 <td style="text-align:center;">
@@ -227,10 +188,6 @@ evaluatesetting14
 </tr>
 <tr>
 <td style="text-align:center;width: 20em; ">
-Degenhardt, Seifert, and Szymczak (2019) with a group size of 10, 100
-observations, and a total of 5.000 covariates.
-</td>
-<td style="text-align:center;">
 Boruta algorithm with 500 trees Kursa and Rudnicki (2010)
 </td>
 <td style="text-align:center;">
@@ -239,18 +196,14 @@ evaluatesetting15
 </tr>
 <tr>
 <td style="text-align:center;width: 20em; ">
-Degenhardt, Seifert, and Szymczak (2019) with a group size of 10, 100
-observations, and a total of 5.000 covariates.
-</td>
-<td style="text-align:center;">
-Method from Janitza, Celik, and Boulesteix (2018) with 10.000 trees
+Method from (Janitza, Celik, and Boulesteix 2018) with 10.000 trees
 </td>
 <td style="text-align:center;">
 evaluatesetting16
 </td>
 </tr>
 <tr>
-<td style="text-align:center;width: 20em; ">
+<td style="text-align:center;vertical-align: middle !important;width: 20em; " rowspan="6">
 Strobl et al. (2007) with 100 observations
 </td>
 <td style="text-align:center;">
@@ -262,9 +215,6 @@ evaluatesetting17
 </tr>
 <tr>
 <td style="text-align:center;width: 20em; ">
-Strobl et al. (2007) with 100 observations
-</td>
-<td style="text-align:center;">
 shadowVIMP with pre-selection
 </td>
 <td style="text-align:center;">
@@ -273,9 +223,6 @@ evaluatesetting18
 </tr>
 <tr>
 <td style="text-align:center;width: 20em; ">
-Strobl et al. (2007) with 100 observations
-</td>
-<td style="text-align:center;">
 Boruta algorithm with 10.000 trees Kursa and Rudnicki (2010)
 </td>
 <td style="text-align:center;">
@@ -284,9 +231,6 @@ evaluatesetting19
 </tr>
 <tr>
 <td style="text-align:center;width: 20em; ">
-Strobl et al. (2007) with 100 observations
-</td>
-<td style="text-align:center;">
 Boruta algorithm with 500 trees Kursa and Rudnicki (2010)
 </td>
 <td style="text-align:center;">
@@ -295,9 +239,6 @@ evaluatesetting20
 </tr>
 <tr>
 <td style="text-align:center;width: 20em; ">
-Strobl et al. (2007) with 100 observations
-</td>
-<td style="text-align:center;">
 Method from Hapfelmeier, Hornung, and Haller (2023) with 10.000 trees,
 implemented in Hapfelmeier and Hornung (2023)
 </td>
@@ -307,9 +248,6 @@ evaluatesetting21
 </tr>
 <tr>
 <td style="text-align:center;width: 20em; ">
-Strobl et al. (2007) with 100 observations
-</td>
-<td style="text-align:center;">
 Method from Hapfelmeier, Hornung, and Haller (2023) with 500 trees,
 implemented in Hapfelmeier and Hornung (2023)
 </td>
@@ -318,7 +256,7 @@ evaluatesetting22
 </td>
 </tr>
 <tr>
-<td style="text-align:center;width: 20em; ">
+<td style="text-align:center;vertical-align: middle !important;width: 20em; " rowspan="6">
 The null case of the design Nicodemus et al. (2010)
 </td>
 <td style="text-align:center;">
@@ -330,9 +268,6 @@ evaluatesetting23
 </tr>
 <tr>
 <td style="text-align:center;width: 20em; ">
-The null case of the design Nicodemus et al. (2010)
-</td>
-<td style="text-align:center;">
 shadowVIMP with pre-selection
 </td>
 <td style="text-align:center;">
@@ -341,9 +276,6 @@ evaluatesetting24
 </tr>
 <tr>
 <td style="text-align:center;width: 20em; ">
-The null case of the design Nicodemus et al. (2010)
-</td>
-<td style="text-align:center;">
 Boruta algorithm with 10.000 trees Kursa and Rudnicki (2010)
 </td>
 <td style="text-align:center;">
@@ -352,9 +284,6 @@ evaluatesetting25
 </tr>
 <tr>
 <td style="text-align:center;width: 20em; ">
-The null case of the design Nicodemus et al. (2010)
-</td>
-<td style="text-align:center;">
 Boruta algorithm with 500 trees Kursa and Rudnicki (2010)
 </td>
 <td style="text-align:center;">
@@ -363,9 +292,6 @@ evaluatesetting26
 </tr>
 <tr>
 <td style="text-align:center;width: 20em; ">
-The null case of the design Nicodemus et al. (2010)
-</td>
-<td style="text-align:center;">
 Method from Hapfelmeier, Hornung, and Haller (2023) with 10.000 trees,
 implemented in Hapfelmeier and Hornung (2023)
 </td>
@@ -375,9 +301,6 @@ evaluatesetting27
 </tr>
 <tr>
 <td style="text-align:center;width: 20em; ">
-The null case of the design Nicodemus et al. (2010)
-</td>
-<td style="text-align:center;">
 Method from Hapfelmeier, Hornung, and Haller (2023) with 500 trees,
 implemented in Hapfelmeier and Hornung (2023)
 </td>
@@ -388,7 +311,7 @@ evaluatesetting28
 </tbody>
 </table>
 
-Computational specifications:
+## Computational specifications
 
 Program and Platform:
 
@@ -405,6 +328,7 @@ Program and Platform:
 sessionInfo() of the Linux machine (`01_sim.R`):
 
     #> ```r
+
     #> > sessionInfo()
     #> R version 4.2.2 Patched (2022-11-10 r83330)
     #> Platform: x86_64-pc-linux-gnu (64-bit)
@@ -440,12 +364,14 @@ sessionInfo() of the Linux machine (`01_sim.R`):
     #> [41] generics_0.1.3       vctrs_0.6.3          TH.data_1.1-1        RColorBrewer_1.1-3   tools_4.2.2         
     #> [46] interp_1.1-3         glue_1.8.0           purrr_1.0.4          jpeg_0.1-10          fastmap_1.1.1       
     #> [51] colorspace_2.1-1     cluster_2.1.4        knitr_1.42
+
     #> 
     #> ```
 
 sessionInfo() of the Windows machine (`02_unpack_results.R`):
 
     #> ```r
+
     #> R version 4.2.1 (2022-06-23 ucrt)
     #> Platform: x86_64-w64-mingw32/x64 (64-bit)
     #> Running under: Windows Server x64 (build 17763)
@@ -475,12 +401,14 @@ sessionInfo() of the Windows machine (`02_unpack_results.R`):
     #> [41] magrittr_2.0.3    MASS_7.3-60       htmltools_0.5.4   backports_1.5.0   Hmisc_5.1-0      
     #> [46] scales_1.3.0      codetools_0.2-18  colorspace_2.1-1  mlbench_2.1-3     utf8_1.2.2       
     #> [51] stringi_1.7.12    munsell_0.5.1
+
     #> 
     #> ```
 
 sessionInfo() of the Windows machine (`03_alzheimer.R`):
 
     #> ```r
+
     #> R version 4.2.1 (2022-06-23 ucrt)
     #> Platform: x86_64-w64-mingw32/x64 (64-bit)
     #> Running under: Windows Server x64 (build 17763)
@@ -511,6 +439,7 @@ sessionInfo() of the Windows machine (`03_alzheimer.R`):
     #> [65] glue_1.6.2          evaluate_0.23       rpart.plot_3.1.1    data.table_1.14.6   modelr_0.1.11       mlbench_2.1-3       vctrs_0.6.4         tzdb_0.3.0         
     #> [73] cellranger_1.1.0    gtable_0.3.6        assertthat_0.2.1    xfun_0.41           broom_1.0.7         viridisLite_0.4.2   ragg_1.2.5          googledrive_2.0.0  
     #> [81] gargle_1.3.0        iterators_1.0.14    ellipse_0.4.3       writexl_1.4.2       cluster_2.1.3       timechange_0.2.0    ellipsis_0.3.2
+
     #> 
     #> ```
 
