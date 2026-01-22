@@ -19,7 +19,8 @@ evaluatesetting1_column <- function(i) {
   
   set.seed(seed_list[[i]])
   data <- simulation.data.cor(100, rep(50, 6),  5000)
-  vim_perm_sim_wrapper(data, alphas=c(0.05), nsims=c(1000),
+  vim_perm_sim_wrapper(data, alphas=c(0.05), 
+                       nsims=c(1000), 
                        additional_alphas = c(0.01, 0.1),
                        additional_iter_prop = seq(0.2, 0.8, by=0.2),
                        save_vim_history = "none",
@@ -30,15 +31,15 @@ evaluatesetting1_column <- function(i) {
 
 # Method: shadowVIMP with pre-selection
 evaluatesetting2_column <- function(i) {
-  
+
   require("dplyr")
   require("ranger")
-  
+
   set.seed(seed_list[[i]])
   data <- simulation.data.cor(100, rep(50, 6),  5000)
-  vim_perm_sim_wrapper(data, alphas=c(0.3, 0.15, 0.05), nsims=c(30, 120, 1000), 
+  vim_perm_sim_wrapper(data, alphas=c(0.3, 0.15, 0.05), nsims=c(30, 120, 1000),
                        additional_alphas = c(0.01, 0.1),
-                       additional_iter_prop = seq(0.2, 0.8, by=0.2), 
+                       additional_iter_prop = seq(0.2, 0.8, by=0.2),
                        save_vim_history = "none", num.threads = num.threads.ranger,
                        permute = "columns")
 }
@@ -46,33 +47,33 @@ evaluatesetting2_column <- function(i) {
 # Nicodemus et al. (2010) ----
 # Method: shadowVIMP without pre-selection
 evaluatesetting23_column <- function(i) {
-  
+
   require("dplyr")
   require("ranger")
-  
+
   set.seed(seed_list[[i]])
   data <- nicodemeus_sim()
   data$y <- data$y %>% sample()
-  vim_perm_sim_wrapper(data, alphas=c(0.05), nsims=c(1000), 
+  vim_perm_sim_wrapper(data, alphas=c(0.05), nsims=c(1000),
                        additional_alphas = c(0.01, 0.1),
-                       additional_iter_prop = seq(0.2, 0.8, by=0.2), 
-                       save_vim_history = "none", 
+                       additional_iter_prop = seq(0.2, 0.8, by=0.2),
+                       save_vim_history = "none",
                        num.threads = num.threads.ranger,
                        permute = "columns")
 }
 
 # Method: shadowVIMP with pre-selection
 evaluatesetting24_column <- function(i) {
-  
+
   require("dplyr")
   require("ranger")
-  
+
   set.seed(seed_list[[i]])
   data <- nicodemeus_sim()
   data$y <- data$y %>% sample()
-  vim_perm_sim_wrapper(data, alphas=c(0.3, 0.15, 0.05), nsims=c(30, 120, 1000), 
+  vim_perm_sim_wrapper(data, alphas=c(0.3, 0.15, 0.05), nsims=c(30, 120, 1000),
                        additional_alphas = c(0.01, 0.1),
-                       additional_iter_prop = seq(0.2, 0.8, by=0.2), 
+                       additional_iter_prop = seq(0.2, 0.8, by=0.2),
                        save_vim_history = "none", num.threads = num.threads.ranger,
                        permute = "columns")
 }
@@ -80,7 +81,7 @@ evaluatesetting24_column <- function(i) {
 # Machine setup ----
 # Please choose appropriate values
 num.threads.ranger <- 1    #ranger multithreading
-num.replicates <- 100        #how many replicates of the same design?
+num.replicates <- 100      #how many replicates of the same design?
 
 library(parallel)
 library(doParallel)
@@ -110,8 +111,8 @@ save_RDS_and_delete_object(proposed_without_preselect_deg_50_small, subfolder = 
 save_RDS_and_delete_object(proposed_without_preselect_deg_50, subfolder = "./results_supplementary/intermediate_results/deg50")
 rm(causal)
 
-index <- 1
-save(index, file=paste0("index", index, ".Rda"))
+# index <- 1
+# save(index, file=paste0("index", index, ".Rda"))
 
 
 ### shadowVIMP method - with pre-selection ----
@@ -129,8 +130,8 @@ save_RDS_and_delete_object(proposed_with_preselect_deg_50_small, subfolder = "./
 save_RDS_and_delete_object(proposed_with_preselect_deg_50, subfolder = "./results_supplementary/intermediate_results/deg50")
 rm(causal)
 
-index <- index + 1
-save(index, file=paste0("index", index, ".Rda"))
+# index <- index + 1
+# save(index, file=paste0("index", index, ".Rda"))
 
 ## Nicodemus et al. (2010) ----
 ### shadowVIMP without pre-selection ----
@@ -148,8 +149,8 @@ save_RDS_and_delete_object(proposed_without_preselect_nicodemus_small, subfolder
 save_RDS_and_delete_object(proposed_without_preselect_nicodemus, subfolder = "./results_supplementary/intermediate_results/nicodemus")
 rm(causal)
 
-index <- index + 1
-save(index, file=paste0("index", index, ".Rda"))
+# index <- index + 1
+# save(index, file=paste0("index", index, ".Rda"))
 
 ### shadowVIMP with pre-selection ----
 proposed_with_preselect_nicodemus <- parLapply(cl, 1:num.replicates, function(z) try({evaluatesetting24_column(z)}))
@@ -165,5 +166,7 @@ save_RDS_and_delete_object(proposed_with_preselect_nicodemus_small, subfolder = 
 save_RDS_and_delete_object(proposed_with_preselect_nicodemus, subfolder = "./results_supplementary/intermediate_results/nicodemus")
 rm(causal)
 
-index <- index + 1
-save(index, file=paste0("index", index, ".Rda"))
+# index <- index + 1
+# save(index, file=paste0("index", index, ".Rda"))
+
+stopCluster(cl)
