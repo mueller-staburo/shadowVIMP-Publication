@@ -84,7 +84,7 @@ vim_perm_sim <- function(entire_data,
     dt[,(ncol(predictors_p)+1):(2*ncol(predictors_p))] <- if(permute == "rows") {
       dt[sample(1:n), (ncol(predictors_p)+1):(2*ncol(predictors_p))]
     } else if(permute == "columns") {
-      data.frame(lapply(dt[,(ncol(predictors_p)+1):(2*ncol(predictors_p))], sample))
+      data.frame(lapply(dt[,(ncol(predictors_p)+1):(2*ncol(predictors_p)), drop = FALSE], sample))
     } else {
       stop("invalid argument for permute")
     }
