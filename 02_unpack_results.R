@@ -5,7 +5,8 @@ lapply(list.files(path = "functions/", full.names= T), source)
 set.seed(1807)
 seed_list <- floor(runif(1000, min = 1, max = 999999))
 
-all_files <- list.files(pattern = "_small\\.rds$", full.names = TRUE, recursive = TRUE)
+dir_res <- file.path(here::here(), "results", "intermediate_results")
+all_files <-  list.files(path = dir_res, pattern = "_small\\.rds$", full.names = TRUE, recursive = TRUE) 
 
 # Create a list of files that include the word "proposed" in their names
 proposed_files <- all_files[grepl("proposed", all_files)]
@@ -48,7 +49,7 @@ performance_others(data_list_others[[i]]) %>% group_by(identifier, type, iterpro
     TRUE ~ "Other"  # Default case if no match
   ))
 
-perf_others %>% writexl::write_xlsx(path="results/intermediate_results/perf_others.xlsx")
+perf_others %>% writexl::write_xlsx(path = file.path(dir_res ,"perf_others.xlsx"))
 
 
 #Creates perf_proposed.xlsx which contains all performance measures for the (proposed) method shadowVIMP
@@ -73,16 +74,20 @@ perf_proposed <- foreach(typ = c("per_variable", "pooled"), .combine = rbind) %:
     str_detect(identifier, regex("without_preselect", ignore_case = TRUE)) ~ "Proposed without preselect"))
 
 
-perf_proposed %>% writexl::write_xlsx(path="results/intermediate_results/perf_proposed_all.xlsx")
+perf_proposed %>% writexl::write_xlsx(path = file.path(dir_res ,"perf_proposed_all.xlsx"))
 
 
 # Code generating TABLE 2
+dir_tables <-  file.path(here::here(), "results", "tables")
 data.table::rbindlist(list(perf_proposed %>% filter(Method == 'Proposed with preselect' & type == 'pooled' & iterprop == '1', correction == 'with_correction') %>% 
                              ungroup() %>% 
                              select(design, Method, sensitivity_unadjusted, type1_error, sensitivity_fdr, fdr, sensitivity_fwer, fwer),
-                           perf_others %>% filter(ntree == 10000) %>% ungroup() %>% 
-                             select(design, Method, sensitivity_unadjusted, type1_error, sensitivity_fdr, fdr, sensitivity_fwer, fwer))) %>% arrange(design) %>%
-  writexl::write_xlsx(path="results/tables/table2.xlsx")
+                           perf_others %>% 
+                             filter(ntree == 10000) %>%
+                             ungroup() %>% 
+                             select(design, Method, sensitivity_unadjusted, type1_error, sensitivity_fdr, fdr, sensitivity_fwer, fwer))) %>%
+  arrange(design) %>%
+  writexl::write_xlsx(path = file.path(dir_tables, "table2.xlsx"))
   
 
 ## Nicodemus design selection by variable investigation (TABLE 3)
@@ -141,15 +146,17 @@ select_proposed <- data.table::rbindlist(list(data.table::rbindlist(select_propo
     str_detect(identifier, regex("without_preselect", ignore_case = TRUE)) ~ "Proposed without preselect")
     ,.before = everything()), empty_df_with_var_names), fill=T)
 
-select_proposed_nico <- select_proposed %>% filter(design == "Nicodemus Null Design" & adjustment == "unadjusted") %>% select_if(~ !all(is.na(.)))
+select_proposed_nico <- select_proposed %>% 
+  filter(design == "Nicodemus Null Design" & adjustment == "unadjusted") %>% 
+  select_if(~ !all(is.na(.)))
 
 # Code generating TABLE 3
 data.table::rbindlist(list(select_others_nico, select_proposed_nico), fill = T ) %>% 
   filter(ntree==10000 & adjustment == "unadjusted") %>% 
   select(Method, type, V1, V2, V3, V4, V5, V6, V7, V8, V9, V10, V11, V12) %>% 
   rename_with(~ gsub("^V", "X", .), starts_with("V")) %>% 
-  writexl::write_xlsx("results/tables/table3.xlsx")
+  writexl::write_xlsx(path = file.path(dir_tables, "table3.xlsx"))
 
 
-
-writeLines(capture.output(sessionInfo()), "results/logs/sessionInfo_02_unpack_results.txt")
+dir_logs <-  file.path(here::here(), "results", "logs")
+writeLines(capture.output(sessionInfo()), file.path(dir_logs, "sessionInfo_02_unpack_results.txt"))
