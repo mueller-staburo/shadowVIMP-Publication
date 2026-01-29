@@ -37,7 +37,7 @@ evaluatesetting24_column <- function(i) {
   data <- nicodemeus_sim()
   data$y <- data$y %>% sample()
   vim_perm_sim_wrapper(data,
-                       alphas=c(0.3, 0.15, 0.05), 
+                       alphas=c(0.3, 0.15, 0.05),
                        nsims=c(30, 120, 1000),
                        save_vim_history = "none", 
                        num.threads = num.threads.ranger,
