@@ -22,13 +22,14 @@ library(kableExtra)
 
 This repository contains the code for the simulation study conducted in **"shadowVIMP: Permutation-based multiple testing-controlled variable selection"**. The most important files in this repository are:
 
-1. File `01_sim.R` specifies the data simulation scenarios along with the methods for performing feature selection.
-2. File `02_unpack_resuts.R` gathers the results obtained in the first file and computes performance measures for all scenarios.
-3. File `03_alzheimer.R` performs feature selection using the shadowVIMP method on the Alzheimer dataset from the `AppliedPredictiveModeling` package.
-
+1. File **`01_sim.R`** specifies the data simulation scenarios along with the methods for performing feature selection.
+2. File **`02_unpack_resuts.R`** gathers the results obtained in the first file and computes performance measures for all scenarios.
+3. File **`03_alzheimer.R`** performs feature selection using the shadowVIMP method on the Alzheimer dataset from the `AppliedPredictiveModeling` package.
 
 The remainder of the repository is organized as follows:
 
+* File **`04_sim_supplementary_materials.R`** contains the code for the additional scenarios where shadowVIMP creates shadow variables by permuting the original covariates column-wise instead of the proposed row-wise approach. Two data simulation designs are considered: @degenhardt2019evaluation with a group size of 50, and the null case of the @nicodemus2010behaviour design.
+* File **`05_unpack_supplementary_materials.R`** gathers the results obtained in the `04_sim_supplementary_materials.R` and computes performance measures.
 * **functions/** contains all custom R functions used in this study:
     + `data_simulation_functions.R` implements the various data-generation designs used (see table below).
     + `vim_perm_sim.R`, `add_test_results.R` and `vim_perm_sim_wrapper.R` form the implementation of the proposed shadowVIMP method as used in this study. Since then, the implementation was ported into a publicly available R-package on CRAN: `shadowVIMP` package [@shadowVIMP], which we recommend using.
@@ -39,6 +40,10 @@ The remainder of the repository is organized as follows:
     + **logs/** contains text files capturing session information from `01_sim.R`, `02_unpack_resuts.R` and `03_alzheimer.R`.
     + **tables/** stores tables used in the publication.
     + **`reference.bib`** - BibTeX entries for all papers cited in this repository.
+* **results_supplementary/** contains the results of the supplementary experiments:
+    + **intermediate_results/** contains subfolders named after the simulation scenarios considered in this part of the paper. These subfolders store RDS result files. The `.xlsx` file aggregates performance metrics for the proposed method.
+    + **logs/** contains text files capturing session information from `04_sim_supplementary_materials.R`,
+    + **tables/** stores tables summarising performance obtained in the supplementary experiments.
 
 Below is a table summarizing the data simulation designs and feature selection methods that are used in the `01_sim.R` file.
 

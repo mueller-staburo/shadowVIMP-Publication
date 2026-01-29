@@ -4,22 +4,32 @@
 # shadowVIMP - Simulation Study
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
 This repository contains the code for the simulation study conducted in
 **“shadowVIMP: Permutation-based multiple testing-controlled variable
 selection”**. The most important files in this repository are:
 
-1.  File `01_sim.R` specifies the data simulation scenarios along with
-    the methods for performing feature selection.
-2.  File `02_unpack_resuts.R` gathers the results obtained in the first
-    file and computes performance measures for all scenarios.
-3.  File `03_alzheimer.R` performs feature selection using the
+1.  File **`01_sim.R`** specifies the data simulation scenarios along
+    with the methods for performing feature selection.
+2.  File **`02_unpack_resuts.R`** gathers the results obtained in the
+    first file and computes performance measures for all scenarios.
+3.  File **`03_alzheimer.R`** performs feature selection using the
     shadowVIMP method on the Alzheimer dataset from the
     `AppliedPredictiveModeling` package.
 
 The remainder of the repository is organized as follows:
 
+- File **`04_sim_supplementary_materials.R`** contains the code for the
+  additional scenarios where shadowVIMP creates shadow variables by
+  permuting the original covariates column-wise instead of the proposed
+  row-wise approach. Two data simulation designs are considered:
+  Degenhardt, Seifert, and Szymczak (2019) with a group size of 50, and
+  the null case of the Nicodemus et al. (2010) design.
+- File **`05_unpack_supplementary_materials.R`** gathers the results
+  obtained in the `04_sim_supplementary_materials.R` and computes
+  performance measures.
 - **functions/** contains all custom R functions used in this study:
   - `data_simulation_functions.R` implements the various data-generation
     designs used (see table below).
@@ -42,273 +52,474 @@ The remainder of the repository is organized as follows:
   - **tables/** stores tables used in the publication.
   - **`reference.bib`** - BibTeX entries for all papers cited in this
     repository.
+- **results_supplementary/** contains the results of the supplementary
+  experiments:
+  - **intermediate_results/** contains subfolders named after the
+    simulation scenarios considered in this part of the paper. These
+    subfolders store RDS result files. The `.xlsx` file aggregates
+    performance metrics for the proposed method.
+  - **logs/** contains text files capturing session information from
+    `04_sim_supplementary_materials.R`,
+  - **tables/** stores tables summarising performance obtained in the
+    supplementary experiments.
 
 Below is a table summarizing the data simulation designs and feature
 selection methods that are used in the `01_sim.R` file.
 
 <table class="table" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
+
 <thead>
+
 <tr>
+
 <th style="text-align:center;">
+
 Data Simulation Design
 </th>
+
 <th style="text-align:center;">
+
 Method
 </th>
+
 <th style="text-align:center;">
+
 Setting Name in `01_sim.R`
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:center;vertical-align: middle !important;width: 20em; " rowspan="5">
+
 Degenhardt, Seifert, and Szymczak (2019) with a group size of 50, 100
 observations, and a total of 5.000 covariates.
 </td>
+
 <td style="text-align:center;">
+
 shadowVIMP without pre-selection
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting1
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;width: 20em; ">
+
 shadowVIMP with pre-selection
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting2
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;width: 20em; ">
+
 Boruta algorithm with 10.000 trees Kursa and Rudnicki (2010)
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting3
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;width: 20em; ">
+
 Boruta algorithm with 500 trees Kursa and Rudnicki (2010)
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting4
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;width: 20em; ">
+
 Method from (Janitza, Celik, and Boulesteix 2018) with 10.000 trees
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting5
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;vertical-align: middle !important;width: 20em; " rowspan="6">
+
 Friedman (1991) with 100 observations
 </td>
+
 <td style="text-align:center;">
+
 shadowVIMP without pre-selection
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting6
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;width: 20em; ">
+
 shadowVIMP with pre-selection
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting7
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;width: 20em; ">
+
 Boruta algorithm with 10.000 trees Kursa and Rudnicki (2010)
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting8
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;width: 20em; ">
+
 Boruta algorithm with 500 trees Kursa and Rudnicki (2010)
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting9
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;width: 20em; ">
+
 Method from Hapfelmeier, Hornung, and Haller (2023) with 10.000 trees,
 implemented in Hapfelmeier and Hornung (2023)
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting10
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;width: 20em; ">
+
 Method from Hapfelmeier, Hornung, and Haller (2023) with 500 trees,
 implemented in Hapfelmeier and Hornung (2023)
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting11
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;vertical-align: middle !important;width: 20em; " rowspan="5">
+
 Degenhardt, Seifert, and Szymczak (2019) with a group size of 10, 100
 observations, and a total of 5.000 covariates.
 </td>
+
 <td style="text-align:center;">
+
 shadowVIMP without pre-selection
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting12
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;width: 20em; ">
+
 shadowVIMP with pre-selection
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting13
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;width: 20em; ">
+
 Boruta algorithm with 10.000 trees Kursa and Rudnicki (2010)
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting14
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;width: 20em; ">
+
 Boruta algorithm with 500 trees Kursa and Rudnicki (2010)
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting15
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;width: 20em; ">
+
 Method from (Janitza, Celik, and Boulesteix 2018) with 10.000 trees
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting16
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;vertical-align: middle !important;width: 20em; " rowspan="6">
+
 Strobl et al. (2007) with 100 observations
 </td>
+
 <td style="text-align:center;">
+
 shadowVIMP without pre-selection
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting17
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;width: 20em; ">
+
 shadowVIMP with pre-selection
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting18
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;width: 20em; ">
+
 Boruta algorithm with 10.000 trees Kursa and Rudnicki (2010)
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting19
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;width: 20em; ">
+
 Boruta algorithm with 500 trees Kursa and Rudnicki (2010)
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting20
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;width: 20em; ">
+
 Method from Hapfelmeier, Hornung, and Haller (2023) with 10.000 trees,
 implemented in Hapfelmeier and Hornung (2023)
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting21
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;width: 20em; ">
+
 Method from Hapfelmeier, Hornung, and Haller (2023) with 500 trees,
 implemented in Hapfelmeier and Hornung (2023)
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting22
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;vertical-align: middle !important;width: 20em; " rowspan="6">
+
 The null case of the design Nicodemus et al. (2010)
 </td>
+
 <td style="text-align:center;">
+
 shadowVIMP without pre-selection
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting23
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;width: 20em; ">
+
 shadowVIMP with pre-selection
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting24
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;width: 20em; ">
+
 Boruta algorithm with 10.000 trees Kursa and Rudnicki (2010)
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting25
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;width: 20em; ">
+
 Boruta algorithm with 500 trees Kursa and Rudnicki (2010)
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting26
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;width: 20em; ">
+
 Method from Hapfelmeier, Hornung, and Haller (2023) with 10.000 trees,
 implemented in Hapfelmeier and Hornung (2023)
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting27
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:center;width: 20em; ">
+
 Method from Hapfelmeier, Hornung, and Haller (2023) with 500 trees,
 implemented in Hapfelmeier and Hornung (2023)
 </td>
+
 <td style="text-align:center;">
+
 evaluatesetting28
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ## Computational specifications
